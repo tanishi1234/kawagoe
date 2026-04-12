@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>川越探訪 - 小江戸の魅力</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+
+<script>
+/* =============================================================
+   ✏️  EDIT_HERE — コンテンツはここで自由に編集できます
+   =============================================================
+
+   各セクションのデータを変更するだけでサイトが更新されます。
+   - spots  : 観光スポット
+   - gourmet: グルメ・飲食店
+   - events : イベント・祭り
+
+   地図のURLは以下のように変更してください:
+   "https://maps.google.com/maps?q=スポット名+川越&output=embed&hl=ja"
+   ============================================================= */
+
+const SITE_DATA = {
+
+  // サイト基本情報
+  site: {
+    name: "川越探訪",
+    tagline: "小江戸の魅力",
+    tagline_en: "Discover Kawagoe — The Little Edo",
+    description: "江戸時代の面影を色濃く残す蔵の街、川越。\n歴史・グルメ・祭り、すべてが揃う埼玉の宝を探訪しよう。",
+  },
+
+  // 観光スポット
+  spots: [
+    {
+      name: "時の鐘",
+      name_en: "Toki no Kane — Bell Tower",
+      category: "歴史的建造物",
+      desc: "川越のシンボルとして400年以上にわたり時を告げてきた鐘楼。蔵造りの街並みに溶け込む美しい姿は、川越観光の定番中の定番。",
+      map: "https://maps.google.com/maps?q=時の鐘+川越市&output=embed&hl=ja",
+    },
+    {
+      name: "菓子屋横丁",
+      name_en: "Kashiya Yokocho — Candy Lane",
+      category: "下町・ショッピング",
+      desc: "大正時代から続く昔ながらのお菓子屋が立ち並ぶ路地。川越名物のさつまいも菓子をはじめ、懐かしい駄菓子が心をほぐす。",
+      map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja",
+    },
+    {
+      name: "川越城本丸御殿",
+      name_en: "Kawagoe Castle — Main Hall",
+      category: "城郭・歴史",
+      desc: "江戸時代に築かれた川越城の本丸御殿。関東に現存する唯一の藩主御殿として国の重要文化財に指定されており、当時の政治の中心地を体感できる。",
+      map: "https://maps.google.com/maps?q=川越城本丸御殿&output=embed&hl=ja",
+    },
+    {
+      name: "喜多院",
+      name_en: "Kitain Temple",
+      category: "寺社仏閣",
+      desc: "天長7年（830年）創建の由緒ある天台宗の寺院。徳川家光誕生の間や江戸城から移築した建物を今に伝え、春は桜、秋は紅葉の名所としても名高い。",
+      map: "https://maps.google.com/maps?q=喜多院+川越市&output=embed&hl=ja",
+    },
+    {
+      name: "蔵造りの街並み",
+      name_en: "Kurazukuri Street",
+      category: "景観・まちあるき",
+      desc: "重厚な黒漆喰の蔵造り建築が連なる川越の中心街。明治26年の大火を経て復興した街並みは「一番街」として今も多くの観光客を迎える。",
+      map: "https://maps.google.com/maps?q=川越一番街+蔵造り&output=embed&hl=ja",
+    },
+    {
+      name: "氷川神社",
+      name_en: "Hikawa Shrine",
+      category: "寺社仏閣",
+      desc: "縁結びの神様として知られる川越氷川神社。境内の大ケヤキや絵馬トンネルが人気で、特に縁結び風鈴まつりは夏の風物詩となっている。",
+      map: "https://maps.google.com/maps?q=川越氷川神社&output=embed&hl=ja",
+    },
+  ],
+
+  // グルメ・飲食店
+  gourmet: [
+    {
+      icon: "🍠",
+      name: "川越いも",
+      sub: "川越名物・さつまいも",
+      desc: "江戸時代から「川越いも」として名を馳せてきたさつまいも。焼き芋・いもグラタン・スイーツまで多彩な形で楽しめる。菓子屋横丁周辺が食べ歩きの中心地。",
+    },
+    {
+      icon: "🥡",
+      name: "時の鐘 芋ソフト",
+      sub: "人気テイクアウトスイーツ",
+      desc: "蔵の街散策の定番スイーツ。濃厚なさつまいも風味のソフトクリームは並ぶ価値あり。一番街をそぞろ歩きながらどうぞ。",
+    },
+    {
+      icon: "🍜",
+      name: "川越うどん",
+      sub: "地元の麺文化",
+      desc: "埼玉はうどんの文化圏。川越エリアでも地場野菜を使った武蔵野うどんが楽しめる。太くてコシのある麺は一度食べたら忘れられない。",
+    },
+    {
+      icon: "🍡",
+      name: "駄菓子・和菓子",
+      sub: "菓子屋横丁周辺",
+      desc: "昔ながらの水あめ・麩菓子から職人の手打ち和菓子まで。観光ついでに川越の甘味文化に触れよう。お土産にも最適。",
+    },
+    {
+      icon: "🍻",
+      name: "蔵元見学・利き酒",
+      sub: "老舗酒蔵",
+      desc: "川越には江戸時代から続く老舗の酒蔵が現存する。見学ツアーや利き酒体験ができる蔵も。地ビールや地酒のお土産も充実。",
+    },
+    {
+      icon: "🍱",
+      name: "川越ランチ",
+      sub: "蔵の街の食事処",
+      desc: "一番街・仲町エリアを中心に蔵を改装したカフェやレストランが集まる。古民家での食事体験は旅の思い出に彩りを添えてくれる。",
+    },
+  ],
+
+  // イベント・祭り
+  events: [
+    {
+      month: "1月",
+      month_en: "January",
+      name: "初詣・川越七福神めぐり",
+      desc: "喜多院や氷川神社には元旦から多くの参拝者が訪れる。七福神を祀る7つの寺社を巡る「川越七福神めぐり」は正月の定番コース。",
+    },
+    {
+      month: "3月",
+      month_en: "March",
+      name: "川越春まつり",
+      desc: "喜多院の桜をはじめ、市内各所で花見が楽しめる。週末には露店も立ち並び、春の蔵の街が華やぐ。",
+    },
+    {
+      month: "7月",
+      month_en: "July",
+      name: "百万灯夏まつり",
+      desc: "一番街に約100万個の提灯が灯る幻想的な夏祭り。夕暮れとともに明かりが灯ると、蔵造りの街並みが別世界のような美しさに変わる。",
+    },
+    {
+      month: "10月",
+      month_en: "October",
+      name: "川越まつり（川越氷川祭）",
+      desc: "400年以上の歴史を持つ川越最大の祭り。豪華絢爛な山車が市街を練り歩き、囃子の音色とともに街全体が熱気に包まれる。国の重要無形民俗文化財。",
+    },
+    {
+      month: "11月",
+      month_en: "November",
+      name: "川越菊まつり",
+      desc: "喜多院境内を中心に行われる菊の展示会。丹精込めて育てられた菊の花が秋の境内を彩り、古都の風情と相まって格別の美しさを醸し出す。",
+    },
+  ],
+};
+</script>
+
+<style>
+  :root {
+    --cream: #F4ECDA;
+    --cream-light: #FAF5EB;
+    --dark: #18100A;
+    --brown: #3C1F0C;
+    --accent: #8A2D12;
+    --gold: #B8831E;
+    --mid: #6A4020;
+    --border: rgba(139,46,18,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    line-height: 1.85;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top:0; width:100%; z-index:200;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(244,236,218,0.93);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+  .nav-logo { font-size:.95rem; font-weight:500; letter-spacing:.12em; color:var(--accent); }
+  .nav-links { display:flex; gap:2.2rem; list-style:none; }
+  .nav-links a {
+    text-decoration:none; color:var(--brown); font-size:.8rem;
+    letter-spacing:.1em; transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding: 6rem 2rem 4rem;
+    position: relative;
+  }
+
+  .hero-pattern {
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(139,46,18,0.04) 39px, rgba(139,46,18,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(139,46,18,0.04) 39px, rgba(139,46,18,0.04) 40px);
+    pointer-events:none;
+  }
+
+  .hero-kamon {
+    font-family: 'Cormorant Garamond', serif;
+    font-style:italic; font-size:.85rem;
+    letter-spacing:.4em; color:var(--gold);
+    margin-bottom:1.8rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .hero-title {
+    font-size: clamp(5rem,14vw,10rem);
+    font-weight:700; line-height:1; letter-spacing:-.02em;
+    color:var(--dark); margin-bottom:.8rem;
+    animation: fadeUp .8s .1s ease both;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem,3vw,1.6rem);
+    font-weight:300; color:var(--accent);
+    letter-spacing:.35em; margin-bottom:2.5rem;
+    animation: fadeUp .8s .2s ease both;
+  }
+
+  .hero-desc {
+    max-width:480px; font-size:.9rem; color:var(--mid);
+    line-height:2.2; white-space:pre-line;
+    animation: fadeUp .8s .3s ease both;
+    margin-bottom:4rem;
+  }
+
+  .scroll-hint {
+    display:flex; flex-direction:column; align-items:center; gap:.6rem;
+    animation: fadeUp .8s .5s ease both;
+  }
+  .scroll-hint span { font-size:.7rem; letter-spacing:.25em; color:var(--gold); }
+  .scroll-line {
+    width:1px; height:50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2.2s infinite;
+  }
+
+  @keyframes scrollPulse { 0%,100%{opacity:.3; transform:scaleY(.8)} 50%{opacity:1; transform:scaleY(1)} }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 2rem; }
+  .bg-alt { background: var(--cream-light); }
+
+  .container { max-width:1100px; margin:0 auto; }
+
+  .section-head {
+    display:flex; align-items:flex-end; gap:1.5rem;
+    margin-bottom:4rem;
+  }
+  .sec-num {
+    font-family:'Cormorant Garamond',serif; font-size:5.5rem;
+    font-weight:300; color:rgba(139,46,18,.12); line-height:1; flex-shrink:0;
+  }
+  .sec-label { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.8rem; color:var(--gold); letter-spacing:.2em; }
+  .sec-title { font-size:1.9rem; font-weight:500; letter-spacing:.08em; line-height:1.2; }
+
+  /* ── SPOTS GRID ── */
+  .spots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
+    gap: 2rem;
+  }
+
+  .spot-card {
+    background:#fff; overflow:hidden;
+    box-shadow: 0 2px 24px rgba(26,15,6,.07);
+    transition: transform .3s, box-shadow .3s;
+    border-bottom: 2px solid transparent;
+  }
+  .spot-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(26,15,6,.12);
+    border-bottom-color: var(--gold);
+  }
+  .spot-map { width:100%; height:190px; border:none; display:block; }
+  .spot-info { padding:1.4rem 1.5rem 1.6rem; }
+  .spot-cat { font-size:.68rem; letter-spacing:.2em; color:var(--gold); margin-bottom:.4rem; }
+  .spot-name { font-size:1.15rem; font-weight:500; color:var(--dark); margin-bottom:.2rem; }
+  .spot-name-en {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:.78rem; color:rgba(106,64,32,.6); margin-bottom:.7rem;
+  }
+  .spot-desc { font-size:.82rem; color:var(--mid); line-height:1.9; }
+
+  /* ── GOURMET ── */
+  .gourmet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+    gap: 1.6rem;
+  }
+  .gourmet-card {
+    padding: 1.8rem 1.8rem 2rem;
+    border-top: 2px solid var(--gold);
+    background: rgba(184,131,30,.04);
+    transition: background .3s;
+  }
+  .gourmet-card:hover { background: rgba(184,131,30,.09); }
+  .gourmet-icon { font-size:1.8rem; margin-bottom:.9rem; }
+  .gourmet-name { font-size:1.05rem; font-weight:500; color:var(--dark); margin-bottom:.2rem; }
+  .gourmet-sub { font-size:.7rem; color:var(--gold); letter-spacing:.12em; margin-bottom:.7rem; }
+  .gourmet-desc { font-size:.82rem; color:var(--mid); line-height:1.9; }
+
+  /* ── EVENTS ── */
+  .events-list { display:flex; flex-direction:column; }
+  .event-item {
+    display:grid; grid-template-columns: 90px 1fr;
+    gap:2rem; padding:2.2rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items:center;
+    transition: background .2s;
+  }
+  .event-item:first-child { border-top: 1px solid var(--border); }
+  .event-month { text-align:center; }
+  .event-month-jp { font-size:1.7rem; font-weight:700; color:var(--accent); line-height:1; }
+  .event-month-en {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:.72rem; color:var(--mid); letter-spacing:.08em;
+  }
+  .event-name { font-size:1.05rem; font-weight:500; color:var(--dark); margin-bottom:.35rem; }
+  .event-desc { font-size:.83rem; color:var(--mid); line-height:1.9; }
+
+  /* ── ACCESS ── */
+  .access-wrap {
+    display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;
+  }
+  .access-info h3 { font-size:1.1rem; font-weight:500; margin-bottom:1.2rem; letter-spacing:.05em; }
+  .access-list { list-style:none; display:flex; flex-direction:column; gap:1rem; }
+  .access-list li { font-size:.85rem; color:var(--mid); line-height:1.8; padding-left:1.2rem; position:relative; }
+  .access-list li::before { content:''; position:absolute; left:0; top:.8em; width:5px; height:1px; background:var(--gold); }
+  .access-map-wrap iframe { width:100%; height:350px; border:none; display:block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background:var(--dark); color:rgba(244,236,218,.5);
+    text-align:center; padding:3.5rem 2rem;
+    font-size:.78rem; letter-spacing:.12em;
+  }
+  .footer-title { font-size:1.4rem; font-weight:500; color:var(--cream); margin-bottom:.4rem; letter-spacing:.12em; }
+  .footer-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.9rem; color:var(--gold); margin-bottom:1.5rem; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:700px) {
+    nav { padding:.9rem 1.2rem; }
+    .nav-links { display:none; }
+    .sec-num { font-size:3.5rem; }
+    .spots-grid, .gourmet-grid { grid-template-columns:1fr; }
+    .access-wrap { grid-template-columns:1fr; }
+    .event-item { grid-template-columns:70px 1fr; gap:1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo" id="nav-logo"></div>
+  <ul class="nav-links">
+    <li><a href="#spots">観光スポット</a></li>
+    <li><a href="#gourmet">グルメ</a></li>
+    <li><a href="#events">イベント</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-pattern"></div>
+  <p class="hero-kamon" id="hero-kamon"></p>
+  <h1 class="hero-title" id="hero-title"></h1>
+  <p class="hero-sub" id="hero-sub"></p>
+  <p class="hero-desc" id="hero-desc"></p>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- SPOTS -->
+<section id="spots">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-num">01</div>
+      <div>
+        <div class="sec-label">Sightseeing Spots</div>
+        <h2 class="sec-title">観光スポット</h2>
+      </div>
+    </div>
+    <div class="spots-grid" id="spots-grid"></div>
+  </div>
+</section>
+
+<!-- GOURMET -->
+<section id="gourmet" class="bg-alt">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-num">02</div>
+      <div>
+        <div class="sec-label">Gourmet & Restaurants</div>
+        <h2 class="sec-title">グルメ・飲食店</h2>
+      </div>
+    </div>
+    <div class="gourmet-grid" id="gourmet-grid"></div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-num">03</div>
+      <div>
+        <div class="sec-label">Events & Festivals</div>
+        <h2 class="sec-title">イベント・祭り</h2>
+      </div>
+    </div>
+    <div class="events-list" id="events-list"></div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access" class="bg-alt">
+  <div class="container">
+    <div class="section-head">
+      <div class="sec-num">04</div>
+      <div>
+        <div class="sec-label">Access</div>
+        <h2 class="sec-title">アクセス</h2>
+      </div>
+    </div>
+    <div class="access-wrap">
+      <div class="access-info">
+        <h3>川越への行き方</h3>
+        <ul class="access-list">
+          <li><strong>西武新宿線</strong>：西武新宿駅から本川越駅まで約49分</li>
+          <li><strong>東武東上線</strong>：池袋駅から川越駅まで急行で約30分</li>
+          <li><strong>JR川越線</strong>：大宮駅から川越駅まで約23分</li>
+          <li><strong>お車の場合</strong>：関越自動車道 川越ICより約15分、首都圏中央連絡道 川島ICより約20分</li>
+        </ul>
+      </div>
+      <div class="access-map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=川越市+埼玉県&output=embed&hl=ja&z=14"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title" id="footer-title"></div>
+  <div class="footer-sub" id="footer-sub"></div>
+  <p>© 2025 川越探訪</p>
+</footer>
+
+<script>
+// ── Render from SITE_DATA ──
+const d = SITE_DATA;
+
+// Nav
+document.getElementById('nav-logo').textContent = d.site.name;
+
+// Hero
+document.getElementById('hero-kamon').textContent = d.site.tagline_en;
+document.getElementById('hero-title').textContent = d.site.name;
+document.getElementById('hero-sub').textContent = d.site.tagline;
+document.getElementById('hero-desc').textContent = d.site.description;
+
+// Footer
+document.getElementById('footer-title').textContent = d.site.name;
+document.getElementById('footer-sub').textContent = d.site.tagline_en;
+
+// Spots
+const spotsGrid = document.getElementById('spots-grid');
+d.spots.forEach(s => {
+  spotsGrid.innerHTML += `
+    <div class="spot-card">
+      <iframe class="spot-map" src="${s.map}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="spot-info">
+        <div class="spot-cat">${s.category}</div>
+        <div class="spot-name">${s.name}</div>
+        <div class="spot-name-en">${s.name_en}</div>
+        <p class="spot-desc">${s.desc}</p>
+      </div>
+    </div>`;
+});
+
+// Gourmet
+const gourmetGrid = document.getElementById('gourmet-grid');
+d.gourmet.forEach(g => {
+  gourmetGrid.innerHTML += `
+    <div class="gourmet-card">
+      <div class="gourmet-icon">${g.icon}</div>
+      <div class="gourmet-name">${g.name}</div>
+      <div class="gourmet-sub">${g.sub}</div>
+      <p class="gourmet-desc">${g.desc}</p>
+    </div>`;
+});
+
+// Events
+const eventsList = document.getElementById('events-list');
+d.events.forEach(e => {
+  eventsList.innerHTML += `
+    <div class="event-item">
+      <div class="event-month">
+        <div class="event-month-jp">${e.month}</div>
+        <div class="event-month-en">${e.month_en}</div>
+      </div>
+      <div class="event-body">
+        <div class="event-name">${e.name}</div>
+        <p class="event-desc">${e.desc}</p>
+      </div>
+    </div>`;
+});
+</script>
+</body>
+</html>

@@ -320,6 +320,100 @@ const COUPONS = [
   },
 ];
 
+/* =============================================================
+   ✏️  アフィリエイト — 宿泊・体験予約リンク
+   =============================================================
+   ・linkにアフィリエイトリンクを設定してください
+   ・各ASPに登録後、発行されたリンクに差し替えてください
+     - 楽天トラベル: https://affiliate.rakuten.co.jp/
+     - じゃらん: リクルートアフィリエイト or A8.net
+     - アソビュー: A8.net / もしもアフィリエイト
+     - Amazon: https://affiliate.amazon.co.jp/
+   ・type: "hotel"=宿泊, "experience"=体験, "product"=物販
+   ============================================================= */
+const AFFILIATES = [
+  {
+    id: "af1", type: "hotel",
+    name: "川越プリンスホテル",
+    desc: "本川越駅直結。観光の拠点に最適なシティホテル。朝食バイキングも好評。",
+    price: "6,800円〜 / 泊",
+    rating: 4.2,
+    service: "楽天トラベル",
+    link: "https://travel.rakuten.co.jp/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Kawagoe_Kura_no_Machi_01.jpg",
+  },
+  {
+    id: "af2", type: "hotel",
+    name: "川越東武ホテル",
+    desc: "川越駅西口徒歩1分。ビジネスにも観光にも便利な好立地。",
+    price: "5,500円〜 / 泊",
+    rating: 4.0,
+    service: "じゃらん",
+    link: "https://www.jalan.net/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/5/56/Kawagoe_Toki_no_Kane_1.jpg",
+  },
+  {
+    id: "af3", type: "hotel",
+    name: "スーパーホテル埼玉・川越",
+    desc: "天然温泉付きビジネスホテル。コスパ重視の方におすすめ。",
+    price: "4,980円〜 / 泊",
+    rating: 4.1,
+    service: "楽天トラベル",
+    link: "https://travel.rakuten.co.jp/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/4/45/Kawagoe_Kura_no_Machi_03.jpg",
+  },
+  {
+    id: "af4", type: "experience",
+    name: "川越着物レンタル＆街歩きプラン",
+    desc: "ヘアセット込みの着物レンタル。蔵造りの街並みを和装で散策できます。",
+    price: "3,500円〜",
+    rating: 4.5,
+    service: "アソビュー",
+    link: "https://www.asoview.com/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kawagoe_Hikawa_Shrine%2C_Kawagoe_City%3B_December_2019_%2819%29.jpg",
+  },
+  {
+    id: "af5", type: "experience",
+    name: "川越 人力車体験（30分コース）",
+    desc: "蔵造りの街並みを人力車でめぐるプレミアム体験。ガイド付きで歴史解説も。",
+    price: "5,000円〜",
+    rating: 4.7,
+    service: "じゃらん遊び",
+    link: "https://www.jalan.net/kankou/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Kashiya_yokocho.jpg",
+  },
+  {
+    id: "af6", type: "experience",
+    name: "小江戸川越 抹茶体験",
+    desc: "蔵カフェで本格抹茶を自分で点てる体験。和菓子付き。",
+    price: "2,200円〜",
+    rating: 4.3,
+    service: "アソビュー",
+    link: "https://www.asoview.com/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Nerikiri_-_Tokyo_area_-_May_26_2020_02-23PM.jpeg",
+  },
+  {
+    id: "af7", type: "product",
+    name: "川越いも恋 詰め合わせ（10個入り）",
+    desc: "川越を代表する銘菓。お土産に迷ったらこれ。冷凍配送で全国対応。",
+    price: "1,620円",
+    rating: 4.4,
+    service: "楽天市場",
+    link: "https://www.rakuten.co.jp/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Daigaku-Imo.jpg",
+  },
+  {
+    id: "af8", type: "product",
+    name: "COEDOビール 6本飲み比べセット",
+    desc: "川越発のクラフトビール。紅赤・瑠璃・伽羅など人気6種セット。",
+    price: "3,300円",
+    rating: 4.6,
+    service: "Amazon",
+    link: "https://www.amazon.co.jp/",
+    img: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Kawagoe_Kura_no_Machi_01.jpg",
+  },
+];
+
 const SITE = {
   name: "川越マップ",
   tagline: "小江戸川越の観光・グルメ・イベント情報",
@@ -354,6 +448,7 @@ header { background:var(--white); border-bottom:3px solid var(--red); position:s
 .cat-btn[data-cat="全て"].active { background:var(--dark); border-color:var(--dark); }
 .cat-btn[data-cat="コース"].active { background:#6B21A8; border-color:#6B21A8; }
 .cat-btn[data-cat="食べ歩き"].active { background:#92500A; border-color:#92500A; }
+.cat-btn[data-cat="予約"].active { background:#1A56B0; border-color:#1A56B0; }
 .cat-btn[data-cat="クーポン"].active { background:#D97706; border-color:#D97706; }
 
 /* HERO */
@@ -556,6 +651,43 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 .footer-sub { color:rgba(255,255,255,.4); margin-bottom:1rem; font-size:.7rem; }
 .footer-note { font-size:.65rem; color:rgba(255,255,255,.25); margin-top:.8rem; }
 
+/* AFFILIATE / BOOKING */
+.affiliate-section { display:none; }
+.affiliate-section.active { display:block; }
+.affiliate-filters { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+.affiliate-filter { padding:.25rem .7rem; border-radius:20px; border:1px solid var(--border); background:var(--white); color:var(--mid); font-size:.72rem; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.affiliate-filter:hover,.affiliate-filter.active { background:#1A56B0; color:#fff; border-color:#1A56B0; }
+.affiliate-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.2rem; }
+.affiliate-card { background:var(--white); border:1px solid var(--border); overflow:hidden; transition:box-shadow .25s,transform .25s; }
+.affiliate-card:hover { box-shadow:0 6px 24px rgba(26,17,8,.12); transform:translateY(-3px); }
+.affiliate-card-img { width:100%; height:150px; object-fit:cover; display:block; }
+.affiliate-card-body { padding:1rem 1.1rem 1.1rem; }
+.affiliate-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.3rem; }
+.affiliate-name { font-family:'Noto Serif JP',serif; font-size:.92rem; font-weight:700; color:var(--dark); line-height:1.4; }
+.affiliate-rating { display:flex; align-items:center; gap:.2rem; font-size:.72rem; color:#D97706; font-weight:700; white-space:nowrap; }
+.affiliate-rating::before { content:"★"; }
+.affiliate-desc { font-size:.75rem; color:var(--mid); line-height:1.65; margin-bottom:.5rem; }
+.affiliate-meta { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.4rem; margin-bottom:.7rem; }
+.affiliate-price { font-size:.85rem; font-weight:700; color:var(--red); }
+.affiliate-service { font-size:.6rem; padding:.15rem .5rem; border-radius:2px; background:#E8EDF3; color:#1A56B0; font-weight:500; }
+.affiliate-btn { display:block; width:100%; text-align:center; padding:.5rem; font-size:.78rem; font-weight:500; color:#fff; background:#1A56B0; border:none; border-radius:3px; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:background .15s; text-decoration:none; }
+.affiliate-btn:hover { background:#14408C; }
+.affiliate-btn.experience { background:#166534; }
+.affiliate-btn.experience:hover { background:#0F4D28; }
+.affiliate-btn.product { background:#92500A; }
+.affiliate-btn.product:hover { background:#6E3D08; }
+.affiliate-note { font-size:.6rem; color:var(--mid); text-align:center; margin-top:.3rem; }
+
+/* Sidebar booking widget */
+.side-booking-list { list-style:none; display:flex; flex-direction:column; gap:.5rem; }
+.side-booking-item { display:flex; gap:.6rem; padding:.5rem; border:1px solid var(--border); border-radius:3px; cursor:pointer; transition:background .15s; text-decoration:none; color:inherit; }
+.side-booking-item:hover { background:var(--light); }
+.side-booking-img { width:56px; height:42px; object-fit:cover; border-radius:2px; flex-shrink:0; }
+.side-booking-info { flex:1; min-width:0; }
+.side-booking-name { font-size:.72rem; font-weight:700; color:var(--dark); line-height:1.3; }
+.side-booking-price { font-size:.65rem; color:var(--red); font-weight:500; }
+.side-booking-via { font-size:.55rem; color:var(--mid); }
+
 /* HAMBURGER MENU */
 .hamburger { display:none; background:none; border:1px solid var(--border); padding:.4rem .55rem; cursor:pointer; border-radius:3px; flex-shrink:0; }
 .hamburger span { display:block; width:20px; height:2px; background:var(--dark); margin:4px 0; transition:all .3s; }
@@ -607,6 +739,11 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 
   /* Tabearuki */
   .tabearuki-grid { grid-template-columns:1fr; }
+
+  /* Affiliate */
+  .affiliate-grid { grid-template-columns:1fr; }
+  .affiliate-card-img { height:130px; }
+  .affiliate-btn { min-height:44px; display:flex; align-items:center; justify-content:center; }
 
   /* Coupon */
   .coupon-grid { grid-template-columns:1fr; }
@@ -693,6 +830,16 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
       <div class="tabearuki-grid" id="tabearuki-grid"></div>
     </div>
 
+    <!-- AFFILIATE / BOOKING SECTION -->
+    <div class="affiliate-section" id="affiliate-section">
+      <div class="articles-header">
+        <div class="articles-title">宿泊・体験・お取り寄せ</div>
+        <div class="count-badge" id="affiliate-count"></div>
+      </div>
+      <div class="affiliate-filters" id="affiliate-filters"></div>
+      <div class="affiliate-grid" id="affiliate-grid"></div>
+    </div>
+
     <!-- COUPON SECTION -->
     <div class="coupon-section" id="coupon-section">
       <div class="articles-header">
@@ -714,6 +861,13 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
     <div class="side-box">
       <div class="side-box-title">人気記事 TOP5</div>
       <div class="side-box-body"><ul class="popular-list" id="popular-list"></ul></div>
+    </div>
+    <!-- Booking widget -->
+    <div class="side-box">
+      <div class="side-box-title" style="background:#1A56B0;">宿泊予約</div>
+      <div class="side-box-body">
+        <ul class="side-booking-list" id="side-booking-list"></ul>
+      </div>
     </div>
     <!-- Coupon Highlight -->
     <div class="side-box">
@@ -781,6 +935,9 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
     <button class="bottom-nav-btn" data-section="tabearuki" onclick="mobileNav('食べ歩き','tabearuki')">
       <span class="bottom-nav-icon">&#127836;</span>食べ歩き
     </button>
+    <button class="bottom-nav-btn" data-section="affiliate" onclick="mobileNav('予約','affiliate')">
+      <span class="bottom-nav-icon">&#127968;</span>予約
+    </button>
     <button class="bottom-nav-btn" data-section="coupon" onclick="mobileNav('クーポン','coupon')">
       <span class="bottom-nav-icon">&#127915;</span>クーポン
     </button>
@@ -795,7 +952,7 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 </footer>
 
 <script>
-const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて", couponCat:"すべて" };
+const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて", couponCat:"すべて", affiliateType:"すべて" };
 
 // Static text
 document.getElementById('logo-main').textContent = SITE.name;
@@ -807,7 +964,7 @@ document.getElementById('footer-sub').textContent = SITE.tagline;
 document.getElementById('hero-bg').style.backgroundImage = 'url(' + SITE.hero_img + ')';
 
 // Category nav
-const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き","クーポン"];
+const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き","予約","クーポン"];
 const catNav = document.getElementById('cat-nav');
 cats.forEach(c => {
   const btn = document.createElement('button');
@@ -819,6 +976,7 @@ cats.forEach(c => {
     document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
     if (c === "コース") { showSection('course'); }
     else if (c === "食べ歩き") { showSection('tabearuki'); }
+    else if (c === "予約") { showSection('affiliate'); }
     else if (c === "クーポン") { showSection('coupon'); }
     else { state.cat = c; showSection('articles'); render(); }
   });
@@ -830,6 +988,7 @@ function showSection(s) {
   document.getElementById('articles-section').style.display = s==='articles' ? 'block' : 'none';
   document.getElementById('course-section').className = 'course-section' + (s==='course' ? ' active' : '');
   document.getElementById('tabearuki-section').className = 'tabearuki-section' + (s==='tabearuki' ? ' active' : '');
+  document.getElementById('affiliate-section').className = 'affiliate-section' + (s==='affiliate' ? ' active' : '');
   document.getElementById('coupon-section').className = 'coupon-section' + (s==='coupon' ? ' active' : '');
   document.getElementById('tag-bar').style.display = s==='articles' ? 'flex' : 'none';
 }
@@ -978,6 +1137,60 @@ function renderParking() {
     </li>`).join('');
 }
 
+// Render affiliate
+function renderAffiliate() {
+  const typeLabels = { "すべて":"すべて", "hotel":"宿泊", "experience":"体験", "product":"お取り寄せ" };
+  const types = ["すべて", "hotel", "experience", "product"];
+  const filtersEl = document.getElementById('affiliate-filters');
+  filtersEl.innerHTML = types.map(t =>
+    `<button class="affiliate-filter${t===state.affiliateType?' active':''}" onclick="filterAffiliate('${t}')">${typeLabels[t]}</button>`
+  ).join('');
+
+  const list = state.affiliateType === "すべて" ? AFFILIATES : AFFILIATES.filter(a => a.type === state.affiliateType);
+  document.getElementById('affiliate-count').textContent = list.length + '件';
+  const grid = document.getElementById('affiliate-grid');
+  grid.innerHTML = list.map(a => {
+    const btnClass = a.type === 'experience' ? 'affiliate-btn experience' : a.type === 'product' ? 'affiliate-btn product' : 'affiliate-btn';
+    const btnText = a.type === 'hotel' ? 'プランを見る' : a.type === 'experience' ? '体験を予約する' : '商品を見る';
+    return `
+    <div class="affiliate-card">
+      <img class="affiliate-card-img" src="${a.img}" alt="${a.name}" loading="lazy">
+      <div class="affiliate-card-body">
+        <div class="affiliate-card-top">
+          <div class="affiliate-name">${a.name}</div>
+          <div class="affiliate-rating">${a.rating}</div>
+        </div>
+        <div class="affiliate-desc">${a.desc}</div>
+        <div class="affiliate-meta">
+          <div class="affiliate-price">${a.price}</div>
+          <span class="affiliate-service">${a.service}</span>
+        </div>
+        <a class="${btnClass}" href="${a.link}" target="_blank" rel="noopener noreferrer">${btnText}</a>
+        <div class="affiliate-note">※ 外部サイトに遷移します（PR）</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function filterAffiliate(type) {
+  state.affiliateType = type;
+  renderAffiliate();
+}
+
+// Sidebar booking widget
+function renderSideBooking() {
+  const hotels = AFFILIATES.filter(a => a.type === 'hotel').slice(0, 3);
+  const list = document.getElementById('side-booking-list');
+  list.innerHTML = hotels.map(h => `
+    <a class="side-booking-item" href="${h.link}" target="_blank" rel="noopener noreferrer">
+      <img class="side-booking-img" src="${h.img}" alt="${h.name}" loading="lazy">
+      <div class="side-booking-info">
+        <div class="side-booking-name">${h.name}</div>
+        <div class="side-booking-price">${h.price}</div>
+        <div class="side-booking-via">${h.service} PR</div>
+      </div>
+    </a>`).join('');
+}
+
 // Render coupons
 function getActiveCoupons() {
   const today = new Date().toISOString().slice(0,10);
@@ -1119,6 +1332,8 @@ origCatBtns.forEach(btn => {
 render();
 renderCourses();
 renderTabearuki();
+renderAffiliate();
+renderSideBooking();
 renderCoupons();
 renderSideCoupons();
 renderSeasons();

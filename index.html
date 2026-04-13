@@ -145,6 +145,86 @@ const ARTICLES = [
   },
 ];
 
+/* =============================================================
+   ✏️  モデルコース — 時間・スポット・説明を自由に編集できます
+   ============================================================= */
+const MODEL_COURSES = [
+  {
+    id: "course-3h",
+    title: "王道3時間コース",
+    sub: "初めての川越観光におすすめ",
+    duration: "約3時間",
+    icon: "3h",
+    color: "#B5291E",
+    spots: [
+      { time: "10:00", name: "本川越駅 出発", desc: "西武新宿線の終点。駅を出たらクレアモール商店街へ。", stay: "—", map: "https://maps.google.com/maps?q=本川越駅&output=embed&hl=ja" },
+      { time: "10:15", name: "蔵造りの街並み（一番街）", desc: "黒漆喰の重厚な蔵造り建築が立ち並ぶメインストリートを散策。", stay: "約30分", map: "https://maps.google.com/maps?q=川越一番街+蔵造り&output=embed&hl=ja" },
+      { time: "10:45", name: "時の鐘", desc: "川越のシンボル。毎日6時・12時・15時・18時に鳴る鐘の音を聞こう。", stay: "約15分", map: "https://maps.google.com/maps?q=時の鐘+川越市&output=embed&hl=ja" },
+      { time: "11:00", name: "菓子屋横丁", desc: "駄菓子屋が並ぶノスタルジックな路地。芋けんぴや麩菓子を食べ歩き。", stay: "約30分", map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja" },
+      { time: "11:30", name: "ランチ", desc: "蔵造りエリアで川越名物うなぎや武蔵野うどんを堪能。", stay: "約60分", map: "https://maps.google.com/maps?q=川越市+一番街+ランチ&output=embed&hl=ja" },
+      { time: "12:30", name: "川越氷川神社", desc: "縁結びの名社。鯛みくじや絵馬トンネルでご縁を祈願。", stay: "約30分", map: "https://maps.google.com/maps?q=川越氷川神社&output=embed&hl=ja" },
+      { time: "13:00", name: "本川越駅 到着", desc: "お疲れさまでした！駅ナカでお土産も買えます。", stay: "—", map: "https://maps.google.com/maps?q=本川越駅&output=embed&hl=ja" },
+    ]
+  },
+  {
+    id: "course-half",
+    title: "じっくり半日コース",
+    sub: "歴史も食も満喫したい方に",
+    duration: "約5時間",
+    icon: "5h",
+    color: "#1A56B0",
+    spots: [
+      { time: "9:30", name: "川越駅 出発", desc: "東武東上線・JR川越線の川越駅から東武バスで一番街方面へ。", stay: "—", map: "https://maps.google.com/maps?q=川越駅&output=embed&hl=ja" },
+      { time: "10:00", name: "喜多院", desc: "徳川家ゆかりの名刹。五百羅漢や家光誕生の間は必見。", stay: "約45分", map: "https://maps.google.com/maps?q=喜多院+川越市&output=embed&hl=ja" },
+      { time: "10:50", name: "川越城本丸御殿", desc: "関東唯一の現存御殿。広い畳の間に当時の威厳を感じる。", stay: "約30分", map: "https://maps.google.com/maps?q=川越城本丸御殿&output=embed&hl=ja" },
+      { time: "11:30", name: "蔵造りの街並み散策", desc: "一番街を北上しながら蔵造り資料館や時の鐘を巡ろう。", stay: "約40分", map: "https://maps.google.com/maps?q=川越一番街+蔵造り&output=embed&hl=ja" },
+      { time: "12:10", name: "ランチ＆食べ歩き", desc: "菓子屋横丁・大正浪漫夢通り周辺でランチと食べ歩きを。", stay: "約80分", map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja" },
+      { time: "13:30", name: "川越氷川神社", desc: "縁結びの神社でゆっくり参拝。裏の新河岸川沿いも散歩に最適。", stay: "約40分", map: "https://maps.google.com/maps?q=川越氷川神社&output=embed&hl=ja" },
+      { time: "14:10", name: "大正浪漫夢通り", desc: "大正時代の洋風建築が並ぶレトロな通り。カフェ休憩にぴったり。", stay: "約20分", map: "https://maps.google.com/maps?q=大正浪漫夢通り+川越&output=embed&hl=ja" },
+      { time: "14:30", name: "川越駅 到着", desc: "クレアモール商店街を通って駅へ。お土産はアトレ川越でも。", stay: "—", map: "https://maps.google.com/maps?q=川越駅&output=embed&hl=ja" },
+    ]
+  },
+];
+
+/* =============================================================
+   ✏️  食べ歩きマップ — ジャンル・エリアで分類
+   ============================================================= */
+const TABEARUKI = [
+  { name: "いも恋（右門）", genre: "さつまいも", area: "一番街", desc: "さつまいもと粒あんをもちもちの皮で包んだ川越銘菓。", price: "約200円", map: "https://maps.google.com/maps?q=右門+川越+いも恋&output=embed&hl=ja" },
+  { name: "芋けんぴ（芋十）", genre: "さつまいも", area: "菓子屋横丁", desc: "カリカリ食感の手作り芋けんぴ。食べ歩きの定番。", price: "約300円〜", map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja" },
+  { name: "おさつチップ", genre: "さつまいも", area: "一番街", desc: "薄切りのさつまいもをカリッと揚げた人気スナック。", price: "約500円", map: "https://maps.google.com/maps?q=おさつチップ+川越&output=embed&hl=ja" },
+  { name: "芋ソフトクリーム", genre: "さつまいも", area: "一番街", desc: "濃厚なさつまいもの風味が楽しめるソフトクリーム。", price: "約400円", map: "https://maps.google.com/maps?q=川越+芋ソフトクリーム&output=embed&hl=ja" },
+  { name: "焼きだんご", genre: "和スイーツ", area: "菓子屋横丁", desc: "醤油の香ばしい香りが食欲をそそる焼きたて団子。", price: "約150円", map: "https://maps.google.com/maps?q=菓子屋横丁+川越+団子&output=embed&hl=ja" },
+  { name: "COEDOビール", genre: "ドリンク", area: "一番街", desc: "川越発のクラフトビール。紅赤（さつまいもラガー）が人気。", price: "約600円", map: "https://maps.google.com/maps?q=COEDO+川越+ビール&output=embed&hl=ja" },
+  { name: "小江戸おはぎ", genre: "和スイーツ", area: "一番街", desc: "もち米とあんこの素朴な味わい。季節限定メニューも。", price: "約200円", map: "https://maps.google.com/maps?q=川越+おはぎ&output=embed&hl=ja" },
+  { name: "川越プリン", genre: "洋スイーツ", area: "大正浪漫夢通り", desc: "レトロな瓶に入ったなめらかプリン。味のバリエーションも豊富。", price: "約400円", map: "https://maps.google.com/maps?q=川越プリン&output=embed&hl=ja" },
+  { name: "鰻おにぎり", genre: "軽食", area: "一番街", desc: "川越名物の鰻をおにぎりで手軽に味わえる一品。", price: "約350円", map: "https://maps.google.com/maps?q=川越+鰻おにぎり&output=embed&hl=ja" },
+  { name: "大学いも（翠扇亭）", genre: "さつまいも", area: "一番街", desc: "外はカリカリ、中はホクホクの絶品大学いも。", price: "約300円", map: "https://maps.google.com/maps?q=翠扇亭+川越&output=embed&hl=ja" },
+  { name: "手焼きせんべい", genre: "軽食", area: "菓子屋横丁", desc: "目の前で焼いてくれる体験型グルメ。醤油の香りがたまらない。", price: "約200円", map: "https://maps.google.com/maps?q=菓子屋横丁+せんべい+川越&output=embed&hl=ja" },
+  { name: "抹茶ラテ", genre: "ドリンク", area: "大正浪漫夢通り", desc: "蔵カフェで味わう本格抹茶ラテ。テイクアウトもOK。", price: "約500円", map: "https://maps.google.com/maps?q=大正浪漫夢通り+抹茶+川越&output=embed&hl=ja" },
+];
+
+/* =============================================================
+   ✏️  季節カレンダー
+   ============================================================= */
+const SEASONS = [
+  { month: "3〜4月", season: "春", icon: "🌸", title: "桜の季節", items: ["喜多院の桜まつり", "新河岸川の桜並木", "中院のしだれ桜"] },
+  { month: "5〜6月", season: "春", icon: "🌿", title: "新緑の季節", items: ["川越八幡宮の藤棚", "伊佐沼のハナショウブ", "新緑の喜多院散策"] },
+  { month: "7〜8月", season: "夏", icon: "🎐", title: "祭りと風鈴", items: ["縁結び風鈴まつり", "百万灯夏まつり", "小江戸川越花火大会"] },
+  { month: "9〜10月", season: "秋", icon: "🏮", title: "秋祭りの季節", items: ["川越まつり（10月）", "いも掘り体験", "ススキの河越城跡"] },
+  { month: "11〜12月", season: "秋", icon: "🍁", title: "紅葉の季節", items: ["喜多院の紅葉", "中院のモミジ", "川越水上公園イルミネーション"] },
+  { month: "1〜2月", season: "冬", icon: "⛩", title: "初詣と梅", items: ["川越氷川神社の初詣", "喜多院だるま市（1/3）", "三芳野神社の梅"] },
+];
+
+/* =============================================================
+   ✏️  駐車場情報
+   ============================================================= */
+const PARKING = [
+  { name: "川越市第1駐車場", type: "市営", capacity: "約100台", fee: "最初の1時間200円、以降100円/30分", address: "川越市幸町1-1", map: "https://maps.google.com/maps?q=川越市第1駐車場&output=embed&hl=ja" },
+  { name: "タイムズ川越幸町", type: "民営", capacity: "約30台", fee: "200円/30分（最大1,200円）", address: "川越市幸町", map: "https://maps.google.com/maps?q=タイムズ川越幸町&output=embed&hl=ja" },
+  { name: "川越市川越駅東口駐車場", type: "市営", capacity: "約250台", fee: "最初の1時間200円、以降100円/30分", address: "川越市脇田町", map: "https://maps.google.com/maps?q=川越駅東口駐車場&output=embed&hl=ja" },
+];
+
 const SITE = {
   name: "川越マップ",
   tagline: "小江戸川越の観光・グルメ・イベント情報",
@@ -170,13 +250,15 @@ body { font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--dark)
 /* HEADER */
 header { background:var(--white); border-bottom:3px solid var(--red); position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,.08); }
 .header-inner { max-width:1140px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1.5rem; gap:1.5rem; }
-.logo { display:flex; flex-direction:column; gap:2px; flex-shrink:0; }
+.logo { display:flex; flex-direction:column; gap:2px; flex-shrink:0; cursor:pointer; }
 .logo-main { font-family:'Noto Serif JP',serif; font-size:1.4rem; font-weight:700; color:var(--red); letter-spacing:.04em; }
 .logo-sub { font-size:.65rem; color:var(--mid); letter-spacing:.08em; }
 .header-nav { display:flex; gap:.3rem; flex-wrap:wrap; }
 .cat-btn { padding:.35rem .9rem; border-radius:2px; border:1px solid var(--border); background:var(--white); color:var(--mid); font-size:.75rem; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .2s; white-space:nowrap; }
 .cat-btn:hover,.cat-btn.active { background:var(--red); color:var(--white); border-color:var(--red); }
 .cat-btn[data-cat="全て"].active { background:var(--dark); border-color:var(--dark); }
+.cat-btn[data-cat="コース"].active { background:#6B21A8; border-color:#6B21A8; }
+.cat-btn[data-cat="食べ歩き"].active { background:#92500A; border-color:#92500A; }
 
 /* HERO */
 .hero { position:relative; height:480px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
@@ -229,6 +311,73 @@ header { background:var(--white); border-bottom:3px solid var(--red); position:s
 .card-map-btn { display:inline-flex; align-items:center; gap:.3rem; margin-top:.8rem; font-size:.72rem; color:var(--red); border:1px solid var(--red); padding:.3rem .7rem; border-radius:2px; background:none; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
 .card-map-btn:hover { background:var(--red); color:var(--white); }
 
+/* MODEL COURSE */
+.course-section { display:none; }
+.course-section.active { display:block; }
+.course-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+.course-card { background:var(--white); border:1px solid var(--border); overflow:hidden; transition:box-shadow .25s; }
+.course-card:hover { box-shadow:0 6px 24px rgba(26,17,8,.12); }
+.course-card-head { padding:1.2rem; display:flex; align-items:center; gap:1rem; border-bottom:1px solid var(--border); }
+.course-icon { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Noto Serif JP',serif; font-weight:700; font-size:.85rem; flex-shrink:0; }
+.course-card-head h3 { font-family:'Noto Serif JP',serif; font-size:1.05rem; font-weight:700; }
+.course-card-head p { font-size:.73rem; color:var(--mid); margin-top:.15rem; }
+.course-duration { font-size:.68rem; color:var(--gold); font-weight:500; }
+.course-timeline { padding:1rem 1.2rem 1.2rem; }
+.timeline-item { display:flex; gap:.8rem; position:relative; padding-bottom:1.2rem; }
+.timeline-item:last-child { padding-bottom:0; }
+.timeline-item:not(:last-child)::after { content:''; position:absolute; left:11px; top:24px; bottom:0; width:2px; background:var(--border); }
+.timeline-dot { width:24px; height:24px; border-radius:50%; border:2px solid var(--red); background:var(--white); flex-shrink:0; display:flex; align-items:center; justify-content:center; z-index:1; }
+.timeline-dot-inner { width:8px; height:8px; border-radius:50%; background:var(--red); }
+.timeline-item:first-child .timeline-dot, .timeline-item:last-child .timeline-dot { border-color:var(--dark); }
+.timeline-item:first-child .timeline-dot-inner, .timeline-item:last-child .timeline-dot-inner { background:var(--dark); }
+.timeline-content { flex:1; min-width:0; }
+.timeline-time { font-size:.7rem; font-weight:700; color:var(--red); }
+.timeline-name { font-size:.85rem; font-weight:700; color:var(--dark); margin:.1rem 0; }
+.timeline-desc { font-size:.73rem; color:var(--mid); line-height:1.6; }
+.timeline-stay { font-size:.65rem; color:var(--gold); margin-top:.2rem; }
+.timeline-map-btn { font-size:.65rem; color:var(--red); border:1px solid var(--red); padding:.15rem .5rem; border-radius:2px; background:none; cursor:pointer; margin-top:.3rem; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.timeline-map-btn:hover { background:var(--red); color:#fff; }
+
+/* TABEARUKI */
+.tabearuki-section { display:none; }
+.tabearuki-section.active { display:block; }
+.tabearuki-filters { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+.tabearuki-filter { padding:.25rem .7rem; border-radius:20px; border:1px solid var(--border); background:var(--white); color:var(--mid); font-size:.72rem; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.tabearuki-filter:hover,.tabearuki-filter.active { background:var(--gold); color:#fff; border-color:var(--gold); }
+.tabearuki-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; }
+.tabearuki-item { background:var(--white); border:1px solid var(--border); padding:1rem 1.2rem; transition:box-shadow .2s,transform .2s; }
+.tabearuki-item:hover { box-shadow:0 4px 16px rgba(26,17,8,.1); transform:translateY(-2px); }
+.tabearuki-item-head { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.4rem; }
+.tabearuki-name { font-family:'Noto Serif JP',serif; font-size:.92rem; font-weight:700; }
+.tabearuki-price { font-size:.72rem; color:var(--gold); font-weight:500; white-space:nowrap; }
+.tabearuki-badges { display:flex; gap:.3rem; margin-bottom:.4rem; }
+.tabearuki-badge { font-size:.6rem; padding:.1rem .45rem; border-radius:2px; }
+.tabearuki-badge.genre { background:#F3E8D0; color:#92500A; }
+.tabearuki-badge.area { background:#E8EDF3; color:#1A56B0; }
+.tabearuki-desc { font-size:.75rem; color:var(--mid); line-height:1.6; }
+.tabearuki-map-btn { font-size:.65rem; color:var(--red); border:1px solid var(--red); padding:.15rem .5rem; border-radius:2px; background:none; cursor:pointer; margin-top:.5rem; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.tabearuki-map-btn:hover { background:var(--red); color:#fff; }
+
+/* SEASON CALENDAR */
+.season-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
+.season-card { padding:.7rem; border:1px solid var(--border); background:var(--white); text-align:center; cursor:default; transition:box-shadow .2s; }
+.season-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.06); }
+.season-icon { font-size:1.4rem; margin-bottom:.2rem; }
+.season-month { font-size:.65rem; color:var(--gold); font-weight:500; }
+.season-title { font-size:.72rem; font-weight:700; color:var(--dark); margin:.1rem 0 .3rem; }
+.season-items { list-style:none; font-size:.62rem; color:var(--mid); line-height:1.7; }
+
+/* PARKING */
+.parking-list { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
+.parking-item { font-size:.75rem; color:var(--mid); line-height:1.6; padding-bottom:.7rem; border-bottom:1px solid var(--border); }
+.parking-item:last-child { border-bottom:none; padding-bottom:0; }
+.parking-item strong { color:var(--dark); display:block; font-size:.73rem; }
+.parking-detail { display:flex; gap:.8rem; flex-wrap:wrap; margin-top:.2rem; }
+.parking-badge { font-size:.6rem; padding:.1rem .4rem; border-radius:2px; }
+.parking-badge.municipal { background:#E8F0E8; color:#166534; }
+.parking-badge.private { background:#F3E8D0; color:#92500A; }
+.parking-map-btn { font-size:.6rem; color:var(--red); cursor:pointer; text-decoration:underline; background:none; border:none; font-family:'Noto Sans JP',sans-serif; }
+
 /* MAP MODAL */
 .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:500; align-items:center; justify-content:center; }
 .modal-bg.open { display:flex; }
@@ -247,7 +396,6 @@ header { background:var(--white); border-bottom:3px solid var(--red); position:s
 .side-box-title { background:var(--dark); color:var(--white); font-size:.75rem; font-weight:700; letter-spacing:.12em; padding:.6rem 1rem; }
 .side-box-body { padding:1rem; }
 
-/* Featured card in sidebar */
 .featured-card { position:relative; height:160px; overflow:hidden; cursor:pointer; margin-bottom:1rem; }
 .featured-card img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
 .featured-card:hover img { transform:scale(1.05); }
@@ -278,15 +426,15 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 .footer-note { font-size:.65rem; color:rgba(255,255,255,.25); margin-top:.8rem; }
 
 /* RESPONSIVE */
-@media(max-width:900px){ .main{grid-template-columns:1fr;} .sidebar{display:grid;grid-template-columns:1fr 1fr;} }
-@media(max-width:600px){ .header-inner{flex-direction:column;align-items:flex-start;gap:.6rem;} .sidebar{grid-template-columns:1fr;} .cards-grid{grid-template-columns:1fr;} .hero{height:340px;} }
+@media(max-width:900px){ .main{grid-template-columns:1fr;} .sidebar{display:grid;grid-template-columns:1fr 1fr;} .season-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:600px){ .header-inner{flex-direction:column;align-items:flex-start;gap:.6rem;} .sidebar{grid-template-columns:1fr;} .cards-grid{grid-template-columns:1fr;} .hero{height:340px;} .course-cards{grid-template-columns:1fr;} .tabearuki-grid{grid-template-columns:1fr;} .season-grid{grid-template-columns:1fr 1fr;} }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <div class="logo">
+    <div class="logo" onclick="showSection('articles');window.scrollTo({top:0,behavior:'smooth'})">
       <div class="logo-main" id="logo-main"></div>
       <div class="logo-sub" id="logo-sub"></div>
     </div>
@@ -304,18 +452,40 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
   </div>
 </section>
 
-<div class="tag-bar">
+<div class="tag-bar" id="tag-bar">
   <span class="tag-bar-label">タグ：</span>
   <div id="tag-bar-pills" style="display:flex;flex-wrap:wrap;gap:.4rem;"></div>
 </div>
 
 <div class="main">
   <div>
-    <div class="articles-header">
-      <div class="articles-title" id="section-title">すべての記事</div>
-      <div class="count-badge" id="count-badge"></div>
+    <!-- ARTICLES SECTION -->
+    <div id="articles-section">
+      <div class="articles-header">
+        <div class="articles-title" id="section-title">すべての記事</div>
+        <div class="count-badge" id="count-badge"></div>
+      </div>
+      <div class="cards-grid" id="cards-grid"></div>
     </div>
-    <div class="cards-grid" id="cards-grid"></div>
+
+    <!-- MODEL COURSE SECTION -->
+    <div class="course-section" id="course-section">
+      <div class="articles-header">
+        <div class="articles-title">モデルコース</div>
+        <div class="count-badge" id="course-count"></div>
+      </div>
+      <div class="course-cards" id="course-cards"></div>
+    </div>
+
+    <!-- TABEARUKI SECTION -->
+    <div class="tabearuki-section" id="tabearuki-section">
+      <div class="articles-header">
+        <div class="articles-title">食べ歩きマップ</div>
+        <div class="count-badge" id="tabearuki-count"></div>
+      </div>
+      <div class="tabearuki-filters" id="tabearuki-filters"></div>
+      <div class="tabearuki-grid" id="tabearuki-grid"></div>
+    </div>
   </div>
 
   <aside class="sidebar">
@@ -328,6 +498,20 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
     <div class="side-box">
       <div class="side-box-title">人気記事 TOP5</div>
       <div class="side-box-body"><ul class="popular-list" id="popular-list"></ul></div>
+    </div>
+    <!-- Season Calendar -->
+    <div class="side-box">
+      <div class="side-box-title">季節のみどころ</div>
+      <div class="side-box-body">
+        <div class="season-grid" id="season-grid"></div>
+      </div>
+    </div>
+    <!-- Parking -->
+    <div class="side-box">
+      <div class="side-box-title">駐車場情報</div>
+      <div class="side-box-body">
+        <ul class="parking-list" id="parking-list"></ul>
+      </div>
     </div>
     <!-- Access -->
     <div class="side-box">
@@ -365,12 +549,12 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 <footer>
   <div class="footer-logo" id="footer-logo"></div>
   <div class="footer-sub" id="footer-sub"></div>
-  <p>© 2025 川越マップ</p>
+  <p>&copy; 2025 川越マップ</p>
   <p class="footer-note">写真提供: Unsplash — 実際の写真に差し替えることをおすすめします</p>
 </footer>
 
 <script>
-const state = { cat:"全て", tag:null };
+const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて" };
 
 // Static text
 document.getElementById('logo-main').textContent = SITE.name;
@@ -382,20 +566,30 @@ document.getElementById('footer-sub').textContent = SITE.tagline;
 document.getElementById('hero-bg').style.backgroundImage = 'url(' + SITE.hero_img + ')';
 
 // Category nav
-const cats = ["全て","観光","グルメ","イベント"];
+const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き"];
 const catNav = document.getElementById('cat-nav');
 cats.forEach(c => {
   const btn = document.createElement('button');
   btn.className = 'cat-btn' + (c==="全て"?' active':'');
   btn.textContent = c; btn.dataset.cat = c;
   btn.addEventListener('click', () => {
-    state.cat = c; state.tag = null;
+    state.tag = null;
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat===c));
     document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-    render();
+    if (c === "コース") { showSection('course'); }
+    else if (c === "食べ歩き") { showSection('tabearuki'); }
+    else { state.cat = c; showSection('articles'); render(); }
   });
   catNav.appendChild(btn);
 });
+
+function showSection(s) {
+  state.section = s;
+  document.getElementById('articles-section').style.display = s==='articles' ? 'block' : 'none';
+  document.getElementById('course-section').className = 'course-section' + (s==='course' ? ' active' : '');
+  document.getElementById('tabearuki-section').className = 'tabearuki-section' + (s==='tabearuki' ? ' active' : '');
+  document.getElementById('tag-bar').style.display = s==='articles' ? 'flex' : 'none';
+}
 
 // Tags
 const allTags = [...new Set(ARTICLES.flatMap(a => a.tags))];
@@ -411,12 +605,12 @@ allTags.forEach(t => {
       state.cat = "全て";
       document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat==="全て"));
     }
-    render();
+    showSection('articles'); render();
   });
   tagBar.appendChild(pill);
 });
 
-// Render cards
+// Render article cards
 function filtered() {
   return ARTICLES.filter(a => {
     const catOk = state.cat==="全て" || a.category===state.cat;
@@ -453,7 +647,95 @@ function render() {
     </div>`).join('');
 }
 
-// Sidebar featured (first 2 articles)
+// Render model courses
+function renderCourses() {
+  const container = document.getElementById('course-cards');
+  document.getElementById('course-count').textContent = MODEL_COURSES.length + 'コース';
+  container.innerHTML = MODEL_COURSES.map(c => `
+    <div class="course-card">
+      <div class="course-card-head">
+        <div class="course-icon" style="background:${c.color}">${c.icon}</div>
+        <div>
+          <h3>${c.title}</h3>
+          <p>${c.sub}</p>
+          <div class="course-duration">${c.duration}</div>
+        </div>
+      </div>
+      <div class="course-timeline">
+        ${c.spots.map(s => `
+          <div class="timeline-item">
+            <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+            <div class="timeline-content">
+              <div class="timeline-time">${s.time}</div>
+              <div class="timeline-name">${s.name}</div>
+              <div class="timeline-desc">${s.desc}</div>
+              ${s.stay !== '—' ? `<div class="timeline-stay">滞在: ${s.stay}</div>` : ''}
+              <button class="timeline-map-btn" onclick="openModal('${s.name}','${s.map}')">地図</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// Render tabearuki
+function renderTabearuki() {
+  const genres = ["すべて", ...new Set(TABEARUKI.map(t => t.genre))];
+  const filtersEl = document.getElementById('tabearuki-filters');
+  filtersEl.innerHTML = genres.map(g =>
+    `<button class="tabearuki-filter${g===state.tabearukiGenre?' active':''}" onclick="filterTabearuki('${g}')">${g}</button>`
+  ).join('');
+
+  const list = state.tabearukiGenre === "すべて" ? TABEARUKI : TABEARUKI.filter(t => t.genre === state.tabearukiGenre);
+  document.getElementById('tabearuki-count').textContent = list.length + '品';
+  const grid = document.getElementById('tabearuki-grid');
+  grid.innerHTML = list.map(t => `
+    <div class="tabearuki-item">
+      <div class="tabearuki-item-head">
+        <div class="tabearuki-name">${t.name}</div>
+        <div class="tabearuki-price">${t.price}</div>
+      </div>
+      <div class="tabearuki-badges">
+        <span class="tabearuki-badge genre">${t.genre}</span>
+        <span class="tabearuki-badge area">${t.area}</span>
+      </div>
+      <div class="tabearuki-desc">${t.desc}</div>
+      <button class="tabearuki-map-btn" onclick="openModal('${t.name}','${t.map}')">地図を見る</button>
+    </div>`).join('');
+}
+function filterTabearuki(genre) {
+  state.tabearukiGenre = genre;
+  renderTabearuki();
+}
+
+// Season calendar
+function renderSeasons() {
+  const grid = document.getElementById('season-grid');
+  grid.innerHTML = SEASONS.map(s => `
+    <div class="season-card">
+      <div class="season-icon">${s.icon}</div>
+      <div class="season-month">${s.month}</div>
+      <div class="season-title">${s.title}</div>
+      <ul class="season-items">${s.items.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+// Parking
+function renderParking() {
+  const list = document.getElementById('parking-list');
+  list.innerHTML = PARKING.map(p => `
+    <li class="parking-item">
+      <strong>${p.name}
+        <span class="parking-badge ${p.type==='市営'?'municipal':'private'}">${p.type}</span>
+      </strong>
+      <div class="parking-detail">
+        <span>${p.capacity}</span>
+        <span>${p.fee}</span>
+      </div>
+      <button class="parking-map-btn" onclick="openModal('${p.name}','${p.map}')">地図を見る</button>
+    </li>`).join('');
+}
+
+// Sidebar featured
 const featuredWrap = document.getElementById('featured-wrap');
 [ARTICLES[0], ARTICLES[10]].forEach(a => {
   featuredWrap.innerHTML += `
@@ -490,7 +772,7 @@ function filterCat(cat) {
   state.cat = cat; state.tag = null;
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat===cat));
   document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-  render();
+  showSection('articles'); render();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -507,7 +789,12 @@ function closeModal(e) {
   }
 }
 
+// Initialize
 render();
+renderCourses();
+renderTabearuki();
+renderSeasons();
+renderParking();
 </script>
 </body>
 </html>

@@ -556,9 +556,81 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 .footer-sub { color:rgba(255,255,255,.4); margin-bottom:1rem; font-size:.7rem; }
 .footer-note { font-size:.65rem; color:rgba(255,255,255,.25); margin-top:.8rem; }
 
+/* HAMBURGER MENU */
+.hamburger { display:none; background:none; border:1px solid var(--border); padding:.4rem .55rem; cursor:pointer; border-radius:3px; flex-shrink:0; }
+.hamburger span { display:block; width:20px; height:2px; background:var(--dark); margin:4px 0; transition:all .3s; }
+.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(4px,4px); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(4px,-4px); }
+
+/* BOTTOM NAV (mobile) */
+.bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; background:var(--white); border-top:1px solid var(--border); z-index:200; box-shadow:0 -2px 12px rgba(0,0,0,.08); padding:.3rem 0; padding-bottom:calc(.3rem + env(safe-area-inset-bottom)); }
+.bottom-nav-inner { display:flex; justify-content:space-around; align-items:center; max-width:500px; margin:0 auto; }
+.bottom-nav-btn { display:flex; flex-direction:column; align-items:center; gap:.15rem; background:none; border:none; color:var(--mid); font-size:.58rem; font-family:'Noto Sans JP',sans-serif; cursor:pointer; padding:.3rem .2rem; transition:color .15s; min-width:0; flex:1; }
+.bottom-nav-btn.active { color:var(--red); }
+.bottom-nav-icon { font-size:1.15rem; line-height:1; }
+
 /* RESPONSIVE */
-@media(max-width:900px){ .main{grid-template-columns:1fr;} .sidebar{display:grid;grid-template-columns:1fr 1fr;} .season-grid{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:600px){ .header-inner{flex-direction:column;align-items:flex-start;gap:.6rem;} .sidebar{grid-template-columns:1fr;} .cards-grid{grid-template-columns:1fr;} .hero{height:340px;} .course-cards{grid-template-columns:1fr;} .tabearuki-grid{grid-template-columns:1fr;} .coupon-grid{grid-template-columns:1fr;} .season-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:900px){
+  .main { grid-template-columns:1fr; }
+  .sidebar { display:grid; grid-template-columns:1fr 1fr; }
+  .season-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:600px){
+  /* Header */
+  .header-inner { flex-direction:row; align-items:center; padding:.5rem 1rem; gap:.8rem; }
+  .hamburger { display:block; }
+  .header-nav { display:none; position:absolute; top:100%; left:0; right:0; background:var(--white); flex-direction:column; padding:.8rem 1rem; border-bottom:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.08); gap:.4rem; z-index:99; }
+  .header-nav.open { display:flex; }
+  .cat-btn { width:100%; text-align:center; padding:.5rem; font-size:.82rem; }
+  .logo-main { font-size:1.2rem; }
+  .logo-sub { font-size:.6rem; }
+
+  /* Hero */
+  .hero { height:280px; }
+  .hero-badge { font-size:.6rem; padding:.2rem .7rem; }
+  .hero h1 { font-size:clamp(1.6rem,8vw,2.4rem); }
+  .hero p { font-size:.8rem; }
+
+  /* Main content */
+  .main { padding:1.2rem .8rem; gap:1.5rem; }
+  .sidebar { grid-template-columns:1fr; }
+  .cards-grid { grid-template-columns:1fr; gap:1rem; }
+  .card-img-wrap { height:180px; }
+
+  /* Course */
+  .course-cards { grid-template-columns:1fr; }
+  .course-card-head { padding:.9rem; }
+  .course-icon { width:40px; height:40px; font-size:.75rem; }
+  .course-card-head h3 { font-size:.95rem; }
+  .timeline-item { gap:.6rem; }
+
+  /* Tabearuki */
+  .tabearuki-grid { grid-template-columns:1fr; }
+
+  /* Coupon */
+  .coupon-grid { grid-template-columns:1fr; }
+  .coupon-card-body { padding:.9rem 1rem; }
+  .coupon-title { font-size:.95rem; }
+
+  /* Season */
+  .season-grid { grid-template-columns:1fr 1fr; }
+
+  /* Tag bar */
+  .tag-bar { padding:.5rem .8rem; gap:.4rem; }
+  .tag-pill { font-size:.65rem; padding:.2rem .55rem; }
+
+  /* Bottom nav */
+  .bottom-nav { display:block; }
+  body { padding-bottom:60px; }
+
+  /* Modal */
+  .modal { width:95%; }
+  .modal iframe { height:280px; }
+
+  /* Touch targets */
+  .card-map-btn, .timeline-map-btn, .tabearuki-map-btn, .coupon-map-btn, .coupon-use-btn { min-height:44px; display:inline-flex; align-items:center; }
+}
 </style>
 </head>
 <body>
@@ -570,6 +642,9 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
       <div class="logo-sub" id="logo-sub"></div>
     </div>
     <nav class="header-nav" id="cat-nav"></nav>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -693,6 +768,24 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
     <iframe id="modal-iframe" src="" allowfullscreen loading="lazy"></iframe>
   </div>
 </div>
+
+<!-- BOTTOM NAV (mobile) -->
+<nav class="bottom-nav" id="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bottom-nav-btn active" data-section="articles" onclick="mobileNav('全て','articles')">
+      <span class="bottom-nav-icon">&#9776;</span>すべて
+    </button>
+    <button class="bottom-nav-btn" data-section="course" onclick="mobileNav('コース','course')">
+      <span class="bottom-nav-icon">&#128694;</span>コース
+    </button>
+    <button class="bottom-nav-btn" data-section="tabearuki" onclick="mobileNav('食べ歩き','tabearuki')">
+      <span class="bottom-nav-icon">&#127836;</span>食べ歩き
+    </button>
+    <button class="bottom-nav-btn" data-section="coupon" onclick="mobileNav('クーポン','coupon')">
+      <span class="bottom-nav-icon">&#127915;</span>クーポン
+    </button>
+  </div>
+</nav>
 
 <footer>
   <div class="footer-logo" id="footer-logo"></div>
@@ -991,6 +1084,36 @@ function closeModal(e) {
     document.getElementById('modal-iframe').src = '';
   }
 }
+
+// Hamburger menu
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('cat-nav').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('cat-nav').classList.remove('open');
+}
+
+// Mobile bottom nav
+function mobileNav(cat, section) {
+  closeMenu();
+  document.querySelectorAll('.bottom-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section===section));
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat===cat));
+  if (section === 'articles') { state.cat = '全て'; showSection('articles'); render(); }
+  else { showSection(section); }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Close menu when a category is clicked
+const origCatBtns = document.querySelectorAll('.cat-btn');
+origCatBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    closeMenu();
+    const sec = btn.dataset.cat === 'コース' ? 'course' : btn.dataset.cat === '食べ歩き' ? 'tabearuki' : btn.dataset.cat === 'クーポン' ? 'coupon' : 'articles';
+    document.querySelectorAll('.bottom-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section===sec));
+  });
+});
 
 // Initialize
 render();

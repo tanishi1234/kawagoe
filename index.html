@@ -11,137 +11,136 @@
 /* =============================================================
    ✏️  EDIT_HERE — コンテンツはここで自由に編集できます
    =============================================================
-   articlesの配列に記事を追加・編集するだけでサイトが更新されます。
-   categoryは "観光" / "グルメ" / "イベント" のいずれかを指定。
-   tagsは自由に追加できます。
-   mapはGoogle Mapsの埋め込みURLを指定してください。
+   img: 写真のURLを入れてください（自分で撮った写真を使う場合は
+        GitHubにアップしてそのURLを指定するのがおすすめです）
+   map: Google Mapsの埋め込みURLを指定してください
    ============================================================= */
 
 const ARTICLES = [
   {
-    id: 1,
-    category: "観光",
-    tags: ["歴史", "定番"],
-    title: "川越のシンボル「時の鐘」— 400年の歴史を刻む鐘楼",
+    id: 1, category: "観光", tags: ["歴史", "定番"],
+    title: "時の鐘",
+    sub: "400年の歴史を刻む川越のシンボル",
     desc: "川越の蔵造りの街並みに溶け込む鐘楼。江戸時代から変わらず時を告げ続ける川越観光の定番スポット。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80",
     map: "https://maps.google.com/maps?q=時の鐘+川越市&output=embed&hl=ja",
   },
   {
-    id: 2,
-    category: "観光",
-    tags: ["下町", "食べ歩き"],
-    title: "「菓子屋横丁」— 大正時代から続く懐かしのお菓子横丁",
+    id: 2, category: "観光", tags: ["下町", "食べ歩き"],
+    title: "菓子屋横丁",
+    sub: "大正時代から続く懐かしのお菓子横丁",
     desc: "昔ながらの駄菓子屋が軒を連ねる路地。川越名物のさつまいも菓子をはじめ、懐かしいお菓子が心をほぐす。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=80",
     map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja",
   },
   {
-    id: 3,
-    category: "観光",
-    tags: ["城郭", "文化財"],
-    title: "「川越城本丸御殿」— 関東唯一現存の藩主御殿",
+    id: 3, category: "観光", tags: ["城郭", "文化財"],
+    title: "川越城本丸御殿",
+    sub: "関東唯一現存の藩主御殿",
     desc: "国の重要文化財。江戸時代の政治の中心地として機能した本丸御殿を今に伝える貴重な歴史建造物。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1590559899731-a382839e5549?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越城本丸御殿&output=embed&hl=ja",
   },
   {
-    id: 4,
-    category: "観光",
-    tags: ["寺院", "桜"],
-    title: "「喜多院」— 徳川ゆかりの天台宗名刹",
+    id: 4, category: "観光", tags: ["寺院", "桜"],
+    title: "喜多院",
+    sub: "徳川ゆかりの天台宗名刹",
     desc: "天長7年（830年）創建。徳川家光誕生の間を今に伝え、春は桜・秋は紅葉の名所として知られる川越の古刹。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80",
     map: "https://maps.google.com/maps?q=喜多院+川越市&output=embed&hl=ja",
   },
   {
-    id: 5,
-    category: "観光",
-    tags: ["街並み", "まちあるき"],
-    title: "「蔵造りの街並み（一番街）」— 明治の面影を残す黒漆喰の通り",
+    id: 5, category: "観光", tags: ["街並み", "まちあるき"],
+    title: "蔵造りの街並み（一番街）",
+    sub: "明治の面影を残す黒漆喰の通り",
     desc: "重厚な黒漆喰の蔵造り建築が連なる川越のメインストリート。明治26年の大火を経て復興した街並みを歩こう。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越一番街+蔵造り&output=embed&hl=ja",
   },
   {
-    id: 6,
-    category: "観光",
-    tags: ["神社", "縁結び"],
-    title: "「川越氷川神社」— 縁結びの神様と風鈴まつり",
+    id: 6, category: "観光", tags: ["神社", "縁結び"],
+    title: "川越氷川神社",
+    sub: "縁結びの神様と風鈴まつり",
     desc: "縁結びの神として知られる川越氷川神社。境内の大ケヤキや縁結び風鈴まつりが人気を集める。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越氷川神社&output=embed&hl=ja",
   },
   {
-    id: 7,
-    category: "グルメ",
-    tags: ["食べ歩き", "さつまいも"],
-    title: "川越名物「芋グルメ」— さつまいもスイーツを食べ歩き",
+    id: 7, category: "グルメ", tags: ["食べ歩き", "さつまいも"],
+    title: "川越の芋グルメ",
+    sub: "さつまいもスイーツを食べ歩き",
     desc: "江戸時代から「川越いも」として名を馳せてきたさつまいも。焼き芋・芋ソフト・芋スイーツを蔵の街で食べ歩こう。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80",
     map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja",
   },
   {
-    id: 8,
-    category: "グルメ",
-    tags: ["うどん", "ランチ"],
-    title: "川越エリアの「武蔵野うどん」— 太麺コシの強さに感動",
+    id: 8, category: "グルメ", tags: ["うどん", "ランチ"],
+    title: "武蔵野うどん",
+    sub: "太麺コシの強さに感動",
     desc: "埼玉の麺文化、武蔵野うどん。地場野菜を使った太くてコシのある麺は一度食べたら忘れられない。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越市+うどん&output=embed&hl=ja",
   },
   {
-    id: 9,
-    category: "グルメ",
-    tags: ["カフェ", "古民家"],
-    title: "蔵を改装した「古民家カフェ」— 街並みを楽しむ休憩スポット",
+    id: 9, category: "グルメ", tags: ["カフェ", "古民家"],
+    title: "蔵を改装した古民家カフェ",
+    sub: "街並みを楽しむ贅沢な休憩スポット",
     desc: "一番街・仲町エリアに点在する蔵改装カフェ。歴史ある空間でスイーツや軽食を楽しむ川越観光の醍醐味。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越市+蔵カフェ&output=embed&hl=ja",
   },
   {
-    id: 10,
-    category: "グルメ",
-    tags: ["お土産", "和菓子"],
-    title: "川越の「和菓子・駄菓子」— お土産に喜ばれる逸品",
+    id: 10, category: "グルメ", tags: ["お土産", "和菓子"],
+    title: "和菓子・駄菓子",
+    sub: "お土産に喜ばれる川越の甘味",
     desc: "昔ながらの水あめ・麩菓子から職人の手打ち和菓子まで。川越散策のお土産は菓子屋横丁周辺でそろう。",
     date: "2025年1月",
+    img: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=80",
     map: "https://maps.google.com/maps?q=菓子屋横丁+川越市&output=embed&hl=ja",
   },
   {
-    id: 11,
-    category: "イベント",
-    tags: ["祭り", "秋"],
-    title: "「川越まつり（川越氷川祭）」— 400年の伝統を持つ最大の祭り",
+    id: 11, category: "イベント", tags: ["祭り", "秋"],
+    title: "川越まつり（川越氷川祭）",
+    sub: "400年の伝統を持つ川越最大の祭り",
     desc: "10月開催。豪華絢爛な山車が市街を練り歩き、囃子の音色とともに街全体が熱気に包まれる。国の重要無形民俗文化財。",
     date: "毎年10月",
+    img: "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越市+氷川神社&output=embed&hl=ja",
   },
   {
-    id: 12,
-    category: "イベント",
-    tags: ["夏", "提灯"],
-    title: "「百万灯夏まつり」— 一番街を彩る幻想的な提灯の灯り",
+    id: 12, category: "イベント", tags: ["夏", "提灯"],
+    title: "百万灯夏まつり",
+    sub: "一番街を彩る幻想的な提灯の灯り",
     desc: "7月開催。約100万個の提灯が蔵造りの街並みを照らす夏の風物詩。夕暮れ後の幻想的な光景は必見。",
     date: "毎年7月",
+    img: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越一番街&output=embed&hl=ja",
   },
   {
-    id: 13,
-    category: "イベント",
-    tags: ["夏", "神社"],
-    title: "「縁結び風鈴まつり」— 川越氷川神社の夏の風物詩",
+    id: 13, category: "イベント", tags: ["夏", "神社"],
+    title: "縁結び風鈴まつり",
+    sub: "川越氷川神社の夏の風物詩",
     desc: "7〜8月開催。境内に飾られた数千個の風鈴が涼やかな音を奏でる。縁結びの短冊を書いて願いを込めよう。",
     date: "毎年7〜8月",
+    img: "https://images.unsplash.com/photo-1601823984263-4f7f56e4e0e5?w=600&q=80",
     map: "https://maps.google.com/maps?q=川越氷川神社&output=embed&hl=ja",
   },
   {
-    id: 14,
-    category: "イベント",
-    tags: ["春", "桜"],
-    title: "「喜多院の桜まつり」— 境内を彩る春の絶景",
+    id: 14, category: "イベント", tags: ["春", "桜"],
+    title: "喜多院の桜まつり",
+    sub: "境内を彩る春の絶景",
     desc: "3〜4月開催。喜多院の境内に咲き誇る桜は川越随一の花見スポット。週末には露店も出て賑わいを見せる。",
     date: "毎年3〜4月",
+    img: "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80",
     map: "https://maps.google.com/maps?q=喜多院+川越市&output=embed&hl=ja",
   },
 ];
@@ -150,13 +149,13 @@ const SITE = {
   name: "川越マップ",
   tagline: "小江戸川越の観光・グルメ・イベント情報",
   desc: "東京・池袋から約30分。江戸の面影が残る小江戸・川越の魅力をまるごと紹介します。",
+  hero_img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1400&q=85",
 };
 </script>
 
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-
 :root {
   --red: #B5291E;
   --dark: #1A1108;
@@ -166,106 +165,121 @@ html { scroll-behavior:smooth; }
   --border: #E2D9D0;
   --gold: #A67C2E;
 }
+body { font-family:'Noto Sans JP',sans-serif; font-weight:400; color:var(--dark); background:var(--light); font-size:14px; line-height:1.8; }
 
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 400;
-  color: var(--dark);
-  background: var(--light);
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-a { text-decoration: none; color: inherit; }
-
-header {
-  background: var(--white);
-  border-bottom: 3px solid var(--red);
-  position: sticky; top:0; z-index:100;
-}
-.header-inner {
-  max-width: 1140px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: .7rem 1.5rem; gap: 1.5rem;
-}
+/* HEADER */
+header { background:var(--white); border-bottom:3px solid var(--red); position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,.08); }
+.header-inner { max-width:1140px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:.7rem 1.5rem; gap:1.5rem; }
 .logo { display:flex; flex-direction:column; gap:2px; flex-shrink:0; }
-.logo-main { font-family: 'Noto Serif JP', serif; font-size: 1.4rem; font-weight: 700; color: var(--red); letter-spacing: .04em; }
-.logo-sub { font-size: .65rem; color: var(--mid); letter-spacing: .08em; }
-
+.logo-main { font-family:'Noto Serif JP',serif; font-size:1.4rem; font-weight:700; color:var(--red); letter-spacing:.04em; }
+.logo-sub { font-size:.65rem; color:var(--mid); letter-spacing:.08em; }
 .header-nav { display:flex; gap:.3rem; flex-wrap:wrap; }
-.cat-btn {
-  padding: .35rem .9rem; border-radius: 2px;
-  border: 1px solid var(--border);
-  background: var(--white); color: var(--mid);
-  font-size: .75rem; cursor: pointer;
-  font-family: 'Noto Sans JP', sans-serif;
-  transition: all .2s; white-space:nowrap;
-}
-.cat-btn:hover, .cat-btn.active { background: var(--red); color: var(--white); border-color: var(--red); }
-.cat-btn[data-cat="全て"].active { background: var(--dark); border-color: var(--dark); }
+.cat-btn { padding:.35rem .9rem; border-radius:2px; border:1px solid var(--border); background:var(--white); color:var(--mid); font-size:.75rem; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .2s; white-space:nowrap; }
+.cat-btn:hover,.cat-btn.active { background:var(--red); color:var(--white); border-color:var(--red); }
+.cat-btn[data-cat="全て"].active { background:var(--dark); border-color:var(--dark); }
 
-.hero { background: var(--dark); padding: 2.8rem 1.5rem; text-align: center; border-bottom: 3px solid var(--gold); }
-.hero h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(1.8rem,5vw,3rem); color: var(--white); font-weight: 700; letter-spacing: .08em; margin-bottom: .5rem; }
-.hero p { color: rgba(255,255,255,.6); font-size: .88rem; letter-spacing: .05em; }
+/* HERO */
+.hero { position:relative; height:480px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.hero-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform 8s ease; }
+.hero:hover .hero-bg { transform:scale(1.04); }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,6,2,.35) 0%, rgba(10,6,2,.65) 100%); }
+.hero-content { position:relative; text-align:center; padding:2rem; }
+.hero-badge { display:inline-block; border:1px solid rgba(255,255,255,.5); color:rgba(255,255,255,.85); font-size:.7rem; letter-spacing:.25em; padding:.3rem 1rem; margin-bottom:1.2rem; }
+.hero h1 { font-family:'Noto Serif JP',serif; font-size:clamp(2.2rem,6vw,4rem); color:var(--white); font-weight:700; letter-spacing:.1em; text-shadow:0 2px 20px rgba(0,0,0,.4); margin-bottom:.6rem; }
+.hero p { color:rgba(255,255,255,.75); font-size:.92rem; letter-spacing:.06em; text-shadow:0 1px 8px rgba(0,0,0,.5); }
 
-.tag-bar { background: var(--white); border-bottom: 1px solid var(--border); padding: .7rem 1.5rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
-.tag-bar-label { font-size: .7rem; color: var(--mid); white-space:nowrap; }
-.tag-pill {
-  padding: .2rem .7rem; border-radius: 20px;
-  border: 1px solid var(--border); background: var(--white); color: var(--mid);
-  font-size: .7rem; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; transition: all .15s;
-}
-.tag-pill:hover, .tag-pill.active { background: var(--gold); color: var(--white); border-color: var(--gold); }
+/* TAG BAR */
+.tag-bar { background:var(--white); border-bottom:1px solid var(--border); padding:.7rem 1.5rem; display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+.tag-bar-label { font-size:.7rem; color:var(--mid); white-space:nowrap; flex-shrink:0; }
+.tag-pill { padding:.2rem .7rem; border-radius:20px; border:1px solid var(--border); background:var(--white); color:var(--mid); font-size:.7rem; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.tag-pill:hover,.tag-pill.active { background:var(--gold); color:var(--white); border-color:var(--gold); }
 
-.main { max-width: 1140px; margin: 0 auto; padding: 1.8rem 1.5rem; display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
+/* LAYOUT */
+.main { max-width:1140px; margin:0 auto; padding:2rem 1.5rem; display:grid; grid-template-columns:1fr 300px; gap:2.5rem; }
 
-.articles-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-.articles-title { font-size: .8rem; font-weight: 700; color: var(--mid); letter-spacing: .1em; border-left: 3px solid var(--red); padding-left: .6rem; }
-.count-badge { font-size: .7rem; color: var(--mid); background: var(--white); border: 1px solid var(--border); padding: .15rem .6rem; border-radius: 20px; }
+/* CARDS */
+.articles-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.4rem; }
+.articles-title { font-size:.8rem; font-weight:700; color:var(--mid); letter-spacing:.1em; border-left:3px solid var(--red); padding-left:.6rem; }
+.count-badge { font-size:.7rem; color:var(--mid); background:var(--white); border:1px solid var(--border); padding:.15rem .6rem; border-radius:20px; }
 
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.2rem; }
+.cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:1.4rem; }
 
-.card { background: var(--white); border: 1px solid var(--border); overflow: hidden; transition: box-shadow .2s, transform .2s; cursor: pointer; }
-.card:hover { box-shadow: 0 4px 20px rgba(26,17,8,.1); transform: translateY(-2px); }
-.card-map { width:100%; height:155px; border:none; display:block; pointer-events:none; }
-.card-body { padding: 1rem 1.1rem 1.2rem; }
-.card-meta { display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; }
-.cat-tag { font-size: .65rem; font-weight: 700; letter-spacing: .1em; padding: .2rem .55rem; border-radius: 2px; }
-.cat-tag.観光 { background: #E8F0FB; color: #1A56B0; }
-.cat-tag.グルメ { background: #FEF3E2; color: #92500A; }
-.cat-tag.イベント { background: #EBF8ED; color: #166534; }
-.card-date { font-size: .65rem; color: var(--mid); }
-.card-title { font-family: 'Noto Serif JP', serif; font-size: .92rem; font-weight: 700; color: var(--dark); line-height: 1.55; margin-bottom: .5rem; }
-.card-desc { font-size: .78rem; color: var(--mid); line-height: 1.75; }
-.card-tags { display:flex; flex-wrap:wrap; gap:.3rem; margin-top: .7rem; }
-.card-tag { font-size: .62rem; color: var(--gold); border: 1px solid rgba(166,124,46,.3); padding: .1rem .5rem; border-radius: 20px; }
-.no-results { grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(--mid); font-size: .9rem; }
+.card { background:var(--white); border:1px solid var(--border); overflow:hidden; transition:box-shadow .25s,transform .25s; cursor:pointer; }
+.card:hover { box-shadow:0 8px 32px rgba(26,17,8,.14); transform:translateY(-4px); }
 
+.card-img-wrap { position:relative; height:190px; overflow:hidden; background:#ddd; }
+.card-img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; display:block; }
+.card:hover .card-img { transform:scale(1.06); }
+.card-img-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,6,2,.5) 0%, transparent 50%); }
+.card-img-cat { position:absolute; top:.7rem; left:.7rem; }
+
+.cat-tag { font-size:.62rem; font-weight:700; letter-spacing:.1em; padding:.2rem .6rem; border-radius:2px; }
+.cat-tag.観光 { background:#1A56B0; color:#fff; }
+.cat-tag.グルメ { background:#92500A; color:#fff; }
+.cat-tag.イベント { background:#166534; color:#fff; }
+
+.card-body { padding:1rem 1.1rem 1.2rem; }
+.card-meta { display:flex; align-items:center; gap:.5rem; margin-bottom:.4rem; }
+.card-date { font-size:.65rem; color:var(--mid); }
+.card-title { font-family:'Noto Serif JP',serif; font-size:1rem; font-weight:700; color:var(--dark); line-height:1.5; margin-bottom:.2rem; }
+.card-sub { font-size:.73rem; color:var(--gold); margin-bottom:.5rem; }
+.card-desc { font-size:.78rem; color:var(--mid); line-height:1.75; }
+.card-tags { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.7rem; }
+.card-tag { font-size:.62rem; color:var(--mid); border:1px solid var(--border); padding:.1rem .5rem; border-radius:20px; }
+.card-map-btn { display:inline-flex; align-items:center; gap:.3rem; margin-top:.8rem; font-size:.72rem; color:var(--red); border:1px solid var(--red); padding:.3rem .7rem; border-radius:2px; background:none; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.card-map-btn:hover { background:var(--red); color:var(--white); }
+
+/* MAP MODAL */
+.modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:500; align-items:center; justify-content:center; }
+.modal-bg.open { display:flex; }
+.modal { background:var(--white); width:90%; max-width:600px; overflow:hidden; border-radius:2px; }
+.modal-head { display:flex; align-items:center; justify-content:space-between; padding:.8rem 1.2rem; border-bottom:1px solid var(--border); }
+.modal-title { font-family:'Noto Serif JP',serif; font-size:1rem; font-weight:700; }
+.modal-close { background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--mid); line-height:1; padding:.2rem .5rem; }
+.modal-close:hover { color:var(--red); }
+.modal iframe { width:100%; height:340px; border:none; display:block; }
+
+.no-results { grid-column:1/-1; text-align:center; padding:4rem 1rem; color:var(--mid); font-size:.9rem; }
+
+/* SIDEBAR */
 .sidebar { display:flex; flex-direction:column; gap:1.5rem; }
-.side-box { background: var(--white); border: 1px solid var(--border); overflow: hidden; }
-.side-box-title { background: var(--dark); color: var(--white); font-size: .75rem; font-weight: 700; letter-spacing: .12em; padding: .6rem 1rem; }
-.side-box-body { padding: 1rem; }
+.side-box { background:var(--white); border:1px solid var(--border); overflow:hidden; }
+.side-box-title { background:var(--dark); color:var(--white); font-size:.75rem; font-weight:700; letter-spacing:.12em; padding:.6rem 1rem; }
+.side-box-body { padding:1rem; }
+
+/* Featured card in sidebar */
+.featured-card { position:relative; height:160px; overflow:hidden; cursor:pointer; margin-bottom:1rem; }
+.featured-card img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+.featured-card:hover img { transform:scale(1.05); }
+.featured-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,6,2,.7) 0%,transparent 55%); }
+.featured-card-text { position:absolute; bottom:.8rem; left:.8rem; right:.8rem; }
+.featured-card-text .cat-tag { margin-bottom:.3rem; display:inline-block; }
+.featured-card-title { font-family:'Noto Serif JP',serif; font-size:.85rem; color:#fff; font-weight:700; line-height:1.4; }
 
 .popular-list { list-style:none; display:flex; flex-direction:column; }
-.popular-item { display:flex; align-items:flex-start; gap:.7rem; padding: .75rem 0; border-bottom: 1px solid var(--border); cursor:pointer; transition: opacity .15s; }
-.popular-item:last-child { border-bottom:none; }
-.popular-item:hover { opacity: .75; }
-.popular-num { font-family: 'Noto Serif JP', serif; font-size: 1.3rem; font-weight: 700; color: var(--border); line-height:1; flex-shrink:0; width:22px; text-align:center; }
-.popular-num.top3 { color: var(--gold); }
-.popular-title { font-size: .78rem; line-height: 1.5; color: var(--dark); }
-.popular-cat { font-size: .62rem; color: var(--mid); margin-top:.15rem; }
+.popular-item { display:flex; align-items:flex-start; gap:.7rem; padding:.7rem 0; border-bottom:1px solid var(--border); cursor:pointer; transition:opacity .15s; }
+.popular-item:last-child { border-bottom:none; padding-bottom:0; }
+.popular-item:hover { opacity:.7; }
+.popular-thumb { width:52px; height:42px; object-fit:cover; flex-shrink:0; border-radius:2px; }
+.popular-num { font-family:'Noto Serif JP',serif; font-size:1.2rem; font-weight:700; color:var(--border); line-height:1; flex-shrink:0; width:18px; text-align:center; margin-top:2px; }
+.popular-num.top3 { color:var(--gold); }
+.popular-title { font-size:.75rem; line-height:1.45; color:var(--dark); }
+.popular-cat { font-size:.62rem; color:var(--mid); margin-top:.1rem; }
 
 .access-list { list-style:none; display:flex; flex-direction:column; gap:.8rem; }
-.access-item { font-size: .78rem; color: var(--mid); line-height:1.7; }
-.access-item strong { color: var(--dark); display:block; font-size: .72rem; }
+.access-item { font-size:.78rem; color:var(--mid); line-height:1.7; }
+.access-item strong { color:var(--dark); display:block; font-size:.72rem; }
 .side-map iframe { width:100%; height:200px; border:none; display:block; }
 
-footer { background: var(--dark); color: rgba(255,255,255,.45); text-align:center; padding: 2.5rem 1.5rem; font-size: .73rem; letter-spacing: .1em; margin-top: 2rem; }
-.footer-logo { font-family: 'Noto Serif JP', serif; font-size: 1.1rem; color: var(--white); margin-bottom: .3rem; }
-.footer-sub-text { color: rgba(255,255,255,.4); margin-bottom: .8rem; font-size: .68rem; }
+/* FOOTER */
+footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center; padding:3rem 1.5rem; font-size:.73rem; letter-spacing:.1em; margin-top:2rem; }
+.footer-logo { font-family:'Noto Serif JP',serif; font-size:1.2rem; color:var(--white); margin-bottom:.3rem; }
+.footer-sub { color:rgba(255,255,255,.4); margin-bottom:1rem; font-size:.7rem; }
+.footer-note { font-size:.65rem; color:rgba(255,255,255,.25); margin-top:.8rem; }
 
-@media(max-width:900px) { .main { grid-template-columns: 1fr; } .sidebar { display:grid; grid-template-columns: 1fr 1fr; } }
-@media(max-width:600px) { .header-inner { flex-direction:column; align-items:flex-start; gap:.6rem; } .sidebar { grid-template-columns: 1fr; } .cards-grid { grid-template-columns: 1fr; } }
+/* RESPONSIVE */
+@media(max-width:900px){ .main{grid-template-columns:1fr;} .sidebar{display:grid;grid-template-columns:1fr 1fr;} }
+@media(max-width:600px){ .header-inner{flex-direction:column;align-items:flex-start;gap:.6rem;} .sidebar{grid-template-columns:1fr;} .cards-grid{grid-template-columns:1fr;} .hero{height:340px;} }
 </style>
 </head>
 <body>
@@ -281,12 +295,17 @@ footer { background: var(--dark); color: rgba(255,255,255,.45); text-align:cente
 </header>
 
 <section class="hero">
-  <h1 id="hero-h1"></h1>
-  <p id="hero-p"></p>
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">KAWAGOE — THE LITTLE EDO</div>
+    <h1 id="hero-h1"></h1>
+    <p id="hero-p"></p>
+  </div>
 </section>
 
 <div class="tag-bar">
-  <span class="tag-bar-label">タグで絞り込む：</span>
+  <span class="tag-bar-label">タグ：</span>
   <div id="tag-bar-pills" style="display:flex;flex-wrap:wrap;gap:.4rem;"></div>
 </div>
 
@@ -300,10 +319,17 @@ footer { background: var(--dark); color: rgba(255,255,255,.45); text-align:cente
   </div>
 
   <aside class="sidebar">
+    <!-- Featured -->
+    <div class="side-box">
+      <div class="side-box-title">注目スポット</div>
+      <div id="featured-wrap"></div>
+    </div>
+    <!-- Popular -->
     <div class="side-box">
       <div class="side-box-title">人気記事 TOP5</div>
       <div class="side-box-body"><ul class="popular-list" id="popular-list"></ul></div>
     </div>
+    <!-- Access -->
     <div class="side-box">
       <div class="side-box-title">川越へのアクセス</div>
       <div class="side-box-body">
@@ -315,6 +341,7 @@ footer { background: var(--dark); color: rgba(255,255,255,.45); text-align:cente
         </ul>
       </div>
     </div>
+    <!-- Map -->
     <div class="side-box">
       <div class="side-box-title">川越エリア地図</div>
       <div class="side-map">
@@ -324,59 +351,75 @@ footer { background: var(--dark); color: rgba(255,255,255,.45); text-align:cente
   </aside>
 </div>
 
+<!-- MAP MODAL -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <iframe id="modal-iframe" src="" allowfullscreen loading="lazy"></iframe>
+  </div>
+</div>
+
 <footer>
   <div class="footer-logo" id="footer-logo"></div>
-  <div class="footer-sub-text" id="footer-sub"></div>
+  <div class="footer-sub" id="footer-sub"></div>
   <p>© 2025 川越マップ</p>
+  <p class="footer-note">写真提供: Unsplash — 実際の写真に差し替えることをおすすめします</p>
 </footer>
 
 <script>
-const state = { cat: "全て", tag: null };
+const state = { cat:"全て", tag:null };
 
+// Static text
 document.getElementById('logo-main').textContent = SITE.name;
 document.getElementById('logo-sub').textContent = SITE.tagline;
 document.getElementById('hero-h1').textContent = SITE.name;
 document.getElementById('hero-p').textContent = SITE.desc;
 document.getElementById('footer-logo').textContent = SITE.name;
 document.getElementById('footer-sub').textContent = SITE.tagline;
+document.getElementById('hero-bg').style.backgroundImage = 'url(' + SITE.hero_img + ')';
 
-const cats = ["全て", "観光", "グルメ", "イベント"];
+// Category nav
+const cats = ["全て","観光","グルメ","イベント"];
 const catNav = document.getElementById('cat-nav');
 cats.forEach(c => {
   const btn = document.createElement('button');
-  btn.className = 'cat-btn' + (c === "全て" ? ' active' : '');
+  btn.className = 'cat-btn' + (c==="全て"?' active':'');
   btn.textContent = c; btn.dataset.cat = c;
   btn.addEventListener('click', () => {
     state.cat = c; state.tag = null;
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === c));
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat===c));
     document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
     render();
   });
   catNav.appendChild(btn);
 });
 
+// Tags
 const allTags = [...new Set(ARTICLES.flatMap(a => a.tags))];
 const tagBar = document.getElementById('tag-bar-pills');
 allTags.forEach(t => {
   const pill = document.createElement('button');
   pill.className = 'tag-pill'; pill.textContent = t; pill.dataset.tag = t;
   pill.addEventListener('click', () => {
-    if (state.tag === t) {
-      state.tag = null; pill.classList.remove('active');
-    } else {
+    if (state.tag===t) { state.tag=null; pill.classList.remove('active'); }
+    else {
       state.tag = t;
-      document.querySelectorAll('.tag-pill').forEach(p => p.classList.toggle('active', p.dataset.tag === t));
+      document.querySelectorAll('.tag-pill').forEach(p => p.classList.toggle('active', p.dataset.tag===t));
       state.cat = "全て";
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === "全て"));
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat==="全て"));
     }
     render();
   });
   tagBar.appendChild(pill);
 });
 
+// Render cards
 function filtered() {
   return ARTICLES.filter(a => {
-    const catOk = state.cat === "全て" || a.category === state.cat;
+    const catOk = state.cat==="全て" || a.category===state.cat;
     const tagOk = !state.tag || a.tags.includes(state.tag);
     return catOk && tagOk;
   });
@@ -385,10 +428,8 @@ function filtered() {
 function render() {
   const list = filtered();
   const grid = document.getElementById('cards-grid');
-  const title = document.getElementById('section-title');
-  const badge = document.getElementById('count-badge');
-  title.textContent = state.tag ? '#' + state.tag : state.cat === "全て" ? "すべての記事" : state.cat;
-  badge.textContent = list.length + '件';
+  document.getElementById('section-title').textContent = state.tag ? '#'+state.tag : state.cat==="全て" ? "すべての記事" : state.cat;
+  document.getElementById('count-badge').textContent = list.length + '件';
 
   if (!list.length) {
     grid.innerHTML = '<div class="no-results">該当する記事が見つかりませんでした</div>';
@@ -396,41 +437,75 @@ function render() {
   }
   grid.innerHTML = list.map(a => `
     <div class="card">
-      <iframe class="card-map" src="${a.map}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="card-img-wrap">
+        <img class="card-img" src="${a.img}" alt="${a.title}" loading="lazy">
+        <div class="card-img-overlay"></div>
+        <div class="card-img-cat"><span class="cat-tag ${a.category}">${a.category}</span></div>
+      </div>
       <div class="card-body">
-        <div class="card-meta">
-          <span class="cat-tag ${a.category}">${a.category}</span>
-          <span class="card-date">${a.date}</span>
-        </div>
+        <div class="card-meta"><span class="card-date">${a.date}</span></div>
         <div class="card-title">${a.title}</div>
+        <div class="card-sub">${a.sub}</div>
         <p class="card-desc">${a.desc}</p>
-        <div class="card-tags">${a.tags.map(t => '<span class="card-tag">#' + t + '</span>').join('')}</div>
+        <div class="card-tags">${a.tags.map(t=>'<span class="card-tag">#'+t+'</span>').join('')}</div>
+        <button class="card-map-btn" onclick="openModal('${a.title}','${a.map}')">地図を見る</button>
       </div>
     </div>`).join('');
 }
 
-const popularIds = [11, 1, 7, 2, 4];
+// Sidebar featured (first 2 articles)
+const featuredWrap = document.getElementById('featured-wrap');
+[ARTICLES[0], ARTICLES[10]].forEach(a => {
+  featuredWrap.innerHTML += `
+    <div class="featured-card" onclick="filterCat('${a.category}')">
+      <img src="${a.img}" alt="${a.title}" loading="lazy">
+      <div class="featured-card-overlay"></div>
+      <div class="featured-card-text">
+        <span class="cat-tag ${a.category}">${a.category}</span>
+        <div class="featured-card-title">${a.title}</div>
+      </div>
+    </div>`;
+});
+
+// Popular list
+const popularIds = [11,1,7,2,4];
 const popList = document.getElementById('popular-list');
-popularIds.forEach((id, i) => {
-  const a = ARTICLES.find(x => x.id === id);
+popularIds.forEach((id,i) => {
+  const a = ARTICLES.find(x => x.id===id);
   if (!a) return;
   const li = document.createElement('li');
   li.className = 'popular-item';
   li.innerHTML = `
-    <div class="popular-num ${i < 3 ? 'top3' : ''}">${i + 1}</div>
+    <div class="popular-num ${i<3?'top3':''}">${i+1}</div>
+    <img class="popular-thumb" src="${a.img}" alt="${a.title}" loading="lazy">
     <div>
       <div class="popular-title">${a.title}</div>
       <div class="popular-cat">${a.category} / ${a.tags[0]}</div>
     </div>`;
-  li.addEventListener('click', () => {
-    state.cat = a.category; state.tag = null;
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === a.category));
-    document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-    render();
-    window.scrollTo({top: 0, behavior:'smooth'});
-  });
+  li.addEventListener('click', () => { filterCat(a.category); });
   popList.appendChild(li);
 });
+
+function filterCat(cat) {
+  state.cat = cat; state.tag = null;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat===cat));
+  document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Modal
+function openModal(title, mapUrl) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-iframe').src = mapUrl;
+  document.getElementById('modal-bg').classList.add('open');
+}
+function closeModal(e) {
+  if (!e || e.target===document.getElementById('modal-bg')) {
+    document.getElementById('modal-bg').classList.remove('open');
+    document.getElementById('modal-iframe').src = '';
+  }
+}
 
 render();
 </script>

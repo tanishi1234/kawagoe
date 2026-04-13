@@ -225,6 +225,101 @@ const PARKING = [
   { name: "川越市川越駅東口駐車場", type: "市営", capacity: "約250台", fee: "最初の1時間200円、以降100円/30分", address: "川越市脇田町", map: "https://maps.google.com/maps?q=川越駅東口駐車場&output=embed&hl=ja" },
 ];
 
+/* =============================================================
+   ✏️  クーポン — 掲載店舗のクーポン情報を管理
+   =============================================================
+   ・掲載料モデル: 各店舗から月額掲載料をいただくイメージ
+   ・linkにお店の公式サイトや予約ページのURLを設定
+   ・is_pr: true にすると「PR」バッジが表示されます
+   ・expires: クーポンの有効期限（期限切れは自動で非表示）
+   ============================================================= */
+const COUPONS = [
+  {
+    id: "c1",
+    shop: "いちのや",
+    category: "グルメ",
+    area: "一番街",
+    title: "うなぎ御膳 10%OFF",
+    desc: "創業200年の老舗で味わう絶品うなぎ。川越マップを見たとお伝えください。",
+    discount: "10%OFF",
+    condition: "ランチタイム限定（11:00〜14:00）・1組1回限り",
+    expires: "2026-12-31",
+    is_pr: true,
+    link: "#",
+    map: "https://maps.google.com/maps?q=いちのや+川越&output=embed&hl=ja",
+  },
+  {
+    id: "c2",
+    shop: "川越着物レンタル 柚屋",
+    category: "体験",
+    area: "一番街",
+    title: "着物レンタル 500円引き",
+    desc: "蔵造りの街並みを着物で散策。ヘアセット付きプランも人気です。",
+    discount: "500円引き",
+    condition: "要事前予約・他クーポン併用不可",
+    expires: "2026-12-31",
+    is_pr: true,
+    link: "#",
+    map: "https://maps.google.com/maps?q=川越+着物レンタル&output=embed&hl=ja",
+  },
+  {
+    id: "c3",
+    shop: "小江戸カフェ 蔵里",
+    category: "カフェ",
+    area: "仲町",
+    title: "ドリンク1杯無料",
+    desc: "蔵を改装したおしゃれカフェ。お食事ご注文の方にドリンク1杯サービス。",
+    discount: "1杯無料",
+    condition: "お食事メニュー注文の方・1組1杯限り",
+    expires: "2026-09-30",
+    is_pr: false,
+    link: "#",
+    map: "https://maps.google.com/maps?q=川越+蔵カフェ&output=embed&hl=ja",
+  },
+  {
+    id: "c4",
+    shop: "菓匠右門",
+    category: "お土産",
+    area: "一番街",
+    title: "いも恋5個入り 1箱100円引き",
+    desc: "川越を代表する銘菓「いも恋」のお土産箱がお得に。",
+    discount: "100円引き",
+    condition: "1会計につき1箱まで・他割引併用不可",
+    expires: "2026-12-31",
+    is_pr: true,
+    link: "#",
+    map: "https://maps.google.com/maps?q=菓匠右門+川越&output=embed&hl=ja",
+  },
+  {
+    id: "c5",
+    shop: "川越温泉 湯遊ランド",
+    category: "体験",
+    area: "川越駅周辺",
+    title: "入館料 200円引き",
+    desc: "観光の疲れを癒す日帰り温泉。露天風呂・サウナ完備。",
+    discount: "200円引き",
+    condition: "大人料金に適用・土日祝も利用可",
+    expires: "2026-12-31",
+    is_pr: false,
+    link: "#",
+    map: "https://maps.google.com/maps?q=川越温泉+湯遊ランド&output=embed&hl=ja",
+  },
+  {
+    id: "c6",
+    shop: "小江戸蔵里 ききざけ処",
+    category: "グルメ",
+    area: "本川越駅前",
+    title: "利き酒セット 100円引き",
+    desc: "埼玉の地酒を飲み比べ。4種類の利き酒セットがお得に。",
+    discount: "100円引き",
+    condition: "20歳以上・お一人様1回限り",
+    expires: "2026-12-31",
+    is_pr: false,
+    link: "#",
+    map: "https://maps.google.com/maps?q=小江戸蔵里+川越&output=embed&hl=ja",
+  },
+];
+
 const SITE = {
   name: "川越マップ",
   tagline: "小江戸川越の観光・グルメ・イベント情報",
@@ -259,6 +354,7 @@ header { background:var(--white); border-bottom:3px solid var(--red); position:s
 .cat-btn[data-cat="全て"].active { background:var(--dark); border-color:var(--dark); }
 .cat-btn[data-cat="コース"].active { background:#6B21A8; border-color:#6B21A8; }
 .cat-btn[data-cat="食べ歩き"].active { background:#92500A; border-color:#92500A; }
+.cat-btn[data-cat="クーポン"].active { background:#D97706; border-color:#D97706; }
 
 /* HERO */
 .hero { position:relative; height:480px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
@@ -358,6 +454,41 @@ header { background:var(--white); border-bottom:3px solid var(--red); position:s
 .tabearuki-map-btn { font-size:.65rem; color:var(--red); border:1px solid var(--red); padding:.15rem .5rem; border-radius:2px; background:none; cursor:pointer; margin-top:.5rem; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
 .tabearuki-map-btn:hover { background:var(--red); color:#fff; }
 
+/* COUPON */
+.coupon-section { display:none; }
+.coupon-section.active { display:block; }
+.coupon-filters { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+.coupon-filter { padding:.25rem .7rem; border-radius:20px; border:1px solid var(--border); background:var(--white); color:var(--mid); font-size:.72rem; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.coupon-filter:hover,.coupon-filter.active { background:#D97706; color:#fff; border-color:#D97706; }
+.coupon-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.2rem; }
+.coupon-card { background:var(--white); border:1px solid var(--border); overflow:hidden; transition:box-shadow .25s,transform .25s; position:relative; }
+.coupon-card:hover { box-shadow:0 6px 24px rgba(26,17,8,.12); transform:translateY(-3px); }
+.coupon-card-ribbon { position:absolute; top:0; right:0; background:#D97706; color:#fff; font-size:.65rem; font-weight:700; padding:.2rem .8rem; letter-spacing:.05em; }
+.coupon-card-pr { position:absolute; top:0; left:0; background:var(--red); color:#fff; font-size:.58rem; font-weight:700; padding:.15rem .5rem; letter-spacing:.08em; }
+.coupon-card-body { padding:1.1rem 1.2rem; }
+.coupon-shop-row { display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; }
+.coupon-shop-name { font-size:.78rem; font-weight:700; color:var(--dark); }
+.coupon-shop-area { font-size:.6rem; padding:.1rem .4rem; border-radius:2px; background:#E8EDF3; color:#1A56B0; }
+.coupon-shop-cat { font-size:.6rem; padding:.1rem .4rem; border-radius:2px; background:#F3E8D0; color:#92500A; }
+.coupon-title { font-family:'Noto Serif JP',serif; font-size:1.05rem; font-weight:700; color:#D97706; margin-bottom:.4rem; line-height:1.4; }
+.coupon-desc { font-size:.75rem; color:var(--mid); line-height:1.65; margin-bottom:.5rem; }
+.coupon-condition { font-size:.68rem; color:var(--mid); background:var(--light); padding:.4rem .6rem; border-radius:4px; margin-bottom:.5rem; line-height:1.5; }
+.coupon-condition::before { content:"条件: "; font-weight:700; color:var(--dark); }
+.coupon-expires { font-size:.62rem; color:var(--mid); margin-bottom:.6rem; }
+.coupon-actions { display:flex; gap:.5rem; flex-wrap:wrap; }
+.coupon-use-btn { display:inline-flex; align-items:center; gap:.3rem; font-size:.73rem; color:#fff; background:#D97706; border:1px solid #D97706; padding:.35rem .9rem; border-radius:2px; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; font-weight:500; text-decoration:none; }
+.coupon-use-btn:hover { background:#B45309; border-color:#B45309; }
+.coupon-map-btn { display:inline-flex; align-items:center; gap:.3rem; font-size:.72rem; color:var(--red); border:1px solid var(--red); padding:.35rem .7rem; border-radius:2px; background:none; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .15s; }
+.coupon-map-btn:hover { background:var(--red); color:#fff; }
+
+/* Sidebar coupon highlight */
+.side-coupon-list { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+.side-coupon-item { padding:.6rem; border:1px dashed #D97706; background:#FFFBEB; border-radius:4px; cursor:pointer; transition:background .15s; }
+.side-coupon-item:hover { background:#FEF3C7; }
+.side-coupon-discount { font-size:.72rem; font-weight:700; color:#D97706; }
+.side-coupon-shop { font-size:.68rem; color:var(--dark); margin-top:.1rem; }
+.side-coupon-title { font-size:.62rem; color:var(--mid); }
+
 /* SEASON CALENDAR */
 .season-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
 .season-card { padding:.7rem; border:1px solid var(--border); background:var(--white); text-align:center; cursor:default; transition:box-shadow .2s; }
@@ -427,7 +558,7 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 
 /* RESPONSIVE */
 @media(max-width:900px){ .main{grid-template-columns:1fr;} .sidebar{display:grid;grid-template-columns:1fr 1fr;} .season-grid{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:600px){ .header-inner{flex-direction:column;align-items:flex-start;gap:.6rem;} .sidebar{grid-template-columns:1fr;} .cards-grid{grid-template-columns:1fr;} .hero{height:340px;} .course-cards{grid-template-columns:1fr;} .tabearuki-grid{grid-template-columns:1fr;} .season-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:600px){ .header-inner{flex-direction:column;align-items:flex-start;gap:.6rem;} .sidebar{grid-template-columns:1fr;} .cards-grid{grid-template-columns:1fr;} .hero{height:340px;} .course-cards{grid-template-columns:1fr;} .tabearuki-grid{grid-template-columns:1fr;} .coupon-grid{grid-template-columns:1fr;} .season-grid{grid-template-columns:1fr 1fr;} }
 </style>
 </head>
 <body>
@@ -486,6 +617,16 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
       <div class="tabearuki-filters" id="tabearuki-filters"></div>
       <div class="tabearuki-grid" id="tabearuki-grid"></div>
     </div>
+
+    <!-- COUPON SECTION -->
+    <div class="coupon-section" id="coupon-section">
+      <div class="articles-header">
+        <div class="articles-title">お得なクーポン</div>
+        <div class="count-badge" id="coupon-count"></div>
+      </div>
+      <div class="coupon-filters" id="coupon-filters"></div>
+      <div class="coupon-grid" id="coupon-grid"></div>
+    </div>
   </div>
 
   <aside class="sidebar">
@@ -498,6 +639,13 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
     <div class="side-box">
       <div class="side-box-title">人気記事 TOP5</div>
       <div class="side-box-body"><ul class="popular-list" id="popular-list"></ul></div>
+    </div>
+    <!-- Coupon Highlight -->
+    <div class="side-box">
+      <div class="side-box-title" style="background:#D97706;">クーポン</div>
+      <div class="side-box-body">
+        <ul class="side-coupon-list" id="side-coupon-list"></ul>
+      </div>
     </div>
     <!-- Season Calendar -->
     <div class="side-box">
@@ -554,7 +702,7 @@ footer { background:var(--dark); color:rgba(255,255,255,.45); text-align:center;
 </footer>
 
 <script>
-const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて" };
+const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて", couponCat:"すべて" };
 
 // Static text
 document.getElementById('logo-main').textContent = SITE.name;
@@ -566,7 +714,7 @@ document.getElementById('footer-sub').textContent = SITE.tagline;
 document.getElementById('hero-bg').style.backgroundImage = 'url(' + SITE.hero_img + ')';
 
 // Category nav
-const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き"];
+const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き","クーポン"];
 const catNav = document.getElementById('cat-nav');
 cats.forEach(c => {
   const btn = document.createElement('button');
@@ -578,6 +726,7 @@ cats.forEach(c => {
     document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
     if (c === "コース") { showSection('course'); }
     else if (c === "食べ歩き") { showSection('tabearuki'); }
+    else if (c === "クーポン") { showSection('coupon'); }
     else { state.cat = c; showSection('articles'); render(); }
   });
   catNav.appendChild(btn);
@@ -588,6 +737,7 @@ function showSection(s) {
   document.getElementById('articles-section').style.display = s==='articles' ? 'block' : 'none';
   document.getElementById('course-section').className = 'course-section' + (s==='course' ? ' active' : '');
   document.getElementById('tabearuki-section').className = 'tabearuki-section' + (s==='tabearuki' ? ' active' : '');
+  document.getElementById('coupon-section').className = 'coupon-section' + (s==='coupon' ? ' active' : '');
   document.getElementById('tag-bar').style.display = s==='articles' ? 'flex' : 'none';
 }
 
@@ -735,6 +885,59 @@ function renderParking() {
     </li>`).join('');
 }
 
+// Render coupons
+function getActiveCoupons() {
+  const today = new Date().toISOString().slice(0,10);
+  return COUPONS.filter(c => c.expires >= today);
+}
+function renderCoupons() {
+  const active = getActiveCoupons();
+  const cats = ["すべて", ...new Set(active.map(c => c.category))];
+  const filtersEl = document.getElementById('coupon-filters');
+  filtersEl.innerHTML = cats.map(c =>
+    `<button class="coupon-filter${c===state.couponCat?' active':''}" onclick="filterCoupon('${c}')">${c}</button>`
+  ).join('');
+
+  const list = state.couponCat === "すべて" ? active : active.filter(c => c.category === state.couponCat);
+  document.getElementById('coupon-count').textContent = list.length + '件';
+  const grid = document.getElementById('coupon-grid');
+  grid.innerHTML = list.map(c => `
+    <div class="coupon-card">
+      <div class="coupon-card-ribbon">${c.discount}</div>
+      ${c.is_pr ? '<div class="coupon-card-pr">PR</div>' : ''}
+      <div class="coupon-card-body">
+        <div class="coupon-shop-row">
+          <span class="coupon-shop-name">${c.shop}</span>
+          <span class="coupon-shop-cat">${c.category}</span>
+          <span class="coupon-shop-area">${c.area}</span>
+        </div>
+        <div class="coupon-title">${c.title}</div>
+        <div class="coupon-desc">${c.desc}</div>
+        <div class="coupon-condition">${c.condition}</div>
+        <div class="coupon-expires">有効期限: ${c.expires.replace(/-/g,'/')}まで</div>
+        <div class="coupon-actions">
+          <a class="coupon-use-btn" href="${c.link}" target="_blank" rel="noopener">クーポンを使う</a>
+          <button class="coupon-map-btn" onclick="openModal('${c.shop}','${c.map}')">地図</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function filterCoupon(cat) {
+  state.couponCat = cat;
+  renderCoupons();
+}
+
+// Sidebar coupon widget
+function renderSideCoupons() {
+  const active = getActiveCoupons().filter(c => c.is_pr).slice(0, 3);
+  const list = document.getElementById('side-coupon-list');
+  list.innerHTML = active.map(c => `
+    <li class="side-coupon-item" onclick="document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat==='クーポン'));showSection('coupon');window.scrollTo({top:0,behavior:'smooth'})">
+      <div class="side-coupon-discount">${c.discount} - ${c.shop}</div>
+      <div class="side-coupon-title">${c.title}</div>
+    </li>`).join('');
+}
+
 // Sidebar featured
 const featuredWrap = document.getElementById('featured-wrap');
 [ARTICLES[0], ARTICLES[10]].forEach(a => {
@@ -793,6 +996,8 @@ function closeModal(e) {
 render();
 renderCourses();
 renderTabearuki();
+renderCoupons();
+renderSideCoupons();
 renderSeasons();
 renderParking();
 </script>

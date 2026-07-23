@@ -227,101 +227,6 @@ const PARKING = [
 ];
 
 /* =============================================================
-   ✏️  クーポン — 掲載店舗のクーポン情報を管理
-   =============================================================
-   ・掲載料モデル: 各店舗から月額掲載料をいただくイメージ
-   ・linkにお店の公式サイトや予約ページのURLを設定
-   ・is_pr: true にすると「PR」バッジが表示されます
-   ・expires: クーポンの有効期限（期限切れは自動で非表示）
-   ============================================================= */
-const COUPONS = [
-  {
-    id: "c1",
-    shop: "いちのや",
-    category: "グルメ",
-    area: "一番街",
-    title: "うなぎ御膳 10%OFF",
-    desc: "創業200年の老舗で味わう絶品うなぎ。川越マップを見たとお伝えください。",
-    discount: "10%OFF",
-    condition: "ランチタイム限定（11:00〜14:00）・1組1回限り",
-    expires: "2026-12-31",
-    is_pr: true,
-    link: "#",
-    map: "https://maps.google.com/maps?q=いちのや+川越&output=embed&hl=ja",
-  },
-  {
-    id: "c2",
-    shop: "川越着物レンタル 柚屋",
-    category: "体験",
-    area: "一番街",
-    title: "着物レンタル 500円引き",
-    desc: "蔵造りの街並みを着物で散策。ヘアセット付きプランも人気です。",
-    discount: "500円引き",
-    condition: "要事前予約・他クーポン併用不可",
-    expires: "2026-12-31",
-    is_pr: true,
-    link: "#",
-    map: "https://maps.google.com/maps?q=川越+着物レンタル&output=embed&hl=ja",
-  },
-  {
-    id: "c3",
-    shop: "小江戸カフェ 蔵里",
-    category: "カフェ",
-    area: "仲町",
-    title: "ドリンク1杯無料",
-    desc: "蔵を改装したおしゃれカフェ。お食事ご注文の方にドリンク1杯サービス。",
-    discount: "1杯無料",
-    condition: "お食事メニュー注文の方・1組1杯限り",
-    expires: "2026-09-30",
-    is_pr: false,
-    link: "#",
-    map: "https://maps.google.com/maps?q=川越+蔵カフェ&output=embed&hl=ja",
-  },
-  {
-    id: "c4",
-    shop: "菓匠右門",
-    category: "お土産",
-    area: "一番街",
-    title: "いも恋5個入り 1箱100円引き",
-    desc: "川越を代表する銘菓「いも恋」のお土産箱がお得に。",
-    discount: "100円引き",
-    condition: "1会計につき1箱まで・他割引併用不可",
-    expires: "2026-12-31",
-    is_pr: true,
-    link: "#",
-    map: "https://maps.google.com/maps?q=菓匠右門+川越&output=embed&hl=ja",
-  },
-  {
-    id: "c5",
-    shop: "川越温泉 湯遊ランド",
-    category: "体験",
-    area: "川越駅周辺",
-    title: "入館料 200円引き",
-    desc: "観光の疲れを癒す日帰り温泉。露天風呂・サウナ完備。",
-    discount: "200円引き",
-    condition: "大人料金に適用・土日祝も利用可",
-    expires: "2026-12-31",
-    is_pr: false,
-    link: "#",
-    map: "https://maps.google.com/maps?q=川越温泉+湯遊ランド&output=embed&hl=ja",
-  },
-  {
-    id: "c6",
-    shop: "小江戸蔵里 ききざけ処",
-    category: "グルメ",
-    area: "本川越駅前",
-    title: "利き酒セット 100円引き",
-    desc: "埼玉の地酒を飲み比べ。4種類の利き酒セットがお得に。",
-    discount: "100円引き",
-    condition: "20歳以上・お一人様1回限り",
-    expires: "2026-12-31",
-    is_pr: false,
-    link: "#",
-    map: "https://maps.google.com/maps?q=小江戸蔵里+川越&output=embed&hl=ja",
-  },
-];
-
-/* =============================================================
    ✏️  アフィリエイト — 宿泊・体験予約リンク
    =============================================================
    ・linkにアフィリエイトリンクを設定してください
@@ -463,7 +368,6 @@ header { background:rgba(27,31,59,.97); backdrop-filter:blur(12px); position:sti
 .cat-btn[data-cat="コース"].active { background:#6B4C9A; border-color:#6B4C9A; }
 .cat-btn[data-cat="食べ歩き"].active { background:#8B5E3C; border-color:#8B5E3C; }
 .cat-btn[data-cat="予約"].active { background:#2D5F8A; border-color:#2D5F8A; }
-.cat-btn[data-cat="クーポン"].active { background:#C07D24; border-color:#C07D24; }
 
 /* HERO */
 .hero { position:relative; height:85vh; max-height:680px; overflow:hidden; display:flex; align-items:flex-end; justify-content:flex-start; }
@@ -563,41 +467,6 @@ header { background:rgba(27,31,59,.97); backdrop-filter:blur(12px); position:sti
 .tabearuki-desc { font-size:.75rem; color:var(--charcoal); line-height:1.6; }
 .tabearuki-map-btn { font-size:.65rem; color:var(--vermillion); border:1px solid var(--vermillion); padding:.15rem .5rem; border-radius:2px; background:none; cursor:pointer; margin-top:.5rem; font-family:var(--sans); transition:all .15s; }
 .tabearuki-map-btn:hover { background:var(--vermillion); color:#fff; }
-
-/* COUPON */
-.coupon-section { display:none; }
-.coupon-section.active { display:block; }
-.coupon-filters { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:1.2rem; }
-.coupon-filter { padding:.25rem .7rem; border-radius:20px; border:1px solid var(--mist); background:var(--white); color:var(--charcoal); font-size:.72rem; cursor:pointer; font-family:var(--sans); transition:all .15s; }
-.coupon-filter:hover,.coupon-filter.active { background:#D97706; color:#fff; border-color:#D97706; }
-.coupon-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.2rem; }
-.coupon-card { background:var(--white); border:1px solid var(--mist); overflow:hidden; transition:box-shadow .25s,transform .25s; position:relative; }
-.coupon-card:hover { box-shadow:0 6px 24px rgba(26,17,8,.12); transform:translateY(-3px); }
-.coupon-card-ribbon { position:absolute; top:0; right:0; background:#D97706; color:#fff; font-size:.65rem; font-weight:700; padding:.2rem .8rem; letter-spacing:.05em; }
-.coupon-card-pr { position:absolute; top:0; left:0; background:var(--vermillion); color:#fff; font-size:.58rem; font-weight:700; padding:.15rem .5rem; letter-spacing:.08em; }
-.coupon-card-body { padding:1.1rem 1.2rem; }
-.coupon-shop-row { display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; }
-.coupon-shop-name { font-size:.78rem; font-weight:700; color:var(--ink); }
-.coupon-shop-area { font-size:.6rem; padding:.1rem .4rem; border-radius:2px; background:#E8EDF3; color:#1A56B0; }
-.coupon-shop-cat { font-size:.6rem; padding:.1rem .4rem; border-radius:2px; background:#F3E8D0; color:#92500A; }
-.coupon-title { font-family:var(--serif); font-size:1.05rem; font-weight:700; color:#D97706; margin-bottom:.4rem; line-height:1.4; }
-.coupon-desc { font-size:.75rem; color:var(--charcoal); line-height:1.65; margin-bottom:.5rem; }
-.coupon-condition { font-size:.68rem; color:var(--charcoal); background:var(--ivory); padding:.4rem .6rem; border-radius:4px; margin-bottom:.5rem; line-height:1.5; }
-.coupon-condition::before { content:"条件: "; font-weight:700; color:var(--ink); }
-.coupon-expires { font-size:.62rem; color:var(--charcoal); margin-bottom:.6rem; }
-.coupon-actions { display:flex; gap:.5rem; flex-wrap:wrap; }
-.coupon-use-btn { display:inline-flex; align-items:center; gap:.3rem; font-size:.73rem; color:#fff; background:#D97706; border:1px solid #D97706; padding:.35rem .9rem; border-radius:2px; cursor:pointer; font-family:var(--sans); transition:all .15s; font-weight:500; text-decoration:none; }
-.coupon-use-btn:hover { background:#B45309; border-color:#B45309; }
-.coupon-map-btn { display:inline-flex; align-items:center; gap:.3rem; font-size:.72rem; color:var(--vermillion); border:1px solid var(--vermillion); padding:.35rem .7rem; border-radius:2px; background:none; cursor:pointer; font-family:var(--sans); transition:all .15s; }
-.coupon-map-btn:hover { background:var(--vermillion); color:#fff; }
-
-/* Sidebar coupon highlight */
-.side-coupon-list { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
-.side-coupon-item { padding:.6rem; border:1px dashed #D97706; background:#FFFBEB; border-radius:4px; cursor:pointer; transition:background .15s; }
-.side-coupon-item:hover { background:#FEF3C7; }
-.side-coupon-discount { font-size:.72rem; font-weight:700; color:#D97706; }
-.side-coupon-shop { font-size:.68rem; color:var(--ink); margin-top:.1rem; }
-.side-coupon-title { font-size:.62rem; color:var(--charcoal); }
 
 /* SEASON CALENDAR */
 .season-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.6rem; }
@@ -798,18 +667,6 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
   .affiliate-filters { gap:.35rem; }
   .affiliate-filter { font-size:.7rem; min-height:36px; display:inline-flex; align-items:center; padding:.3rem .65rem; }
 
-  /* Coupon */
-  .coupon-grid { grid-template-columns:1fr; gap:1.2rem; }
-  .coupon-card-body { padding:1rem; }
-  .coupon-title { font-size:.95rem; }
-  .coupon-desc { font-size:.74rem; }
-  .coupon-condition { font-size:.7rem; padding:.5rem .7rem; }
-  .coupon-filters { gap:.35rem; }
-  .coupon-filter { font-size:.7rem; min-height:36px; display:inline-flex; align-items:center; padding:.3rem .65rem; }
-  .coupon-use-btn { min-height:48px; font-size:.76rem; padding:.4rem 1rem; display:flex; align-items:center; justify-content:center; flex:1; }
-  .coupon-map-btn { min-height:48px; font-size:.74rem; padding:.4rem .8rem; }
-  .coupon-actions { gap:.4rem; }
-
   /* Season */
   .season-grid { grid-template-columns:1fr 1fr; gap:.5rem; }
   .season-card { padding:.6rem .5rem; }
@@ -828,7 +685,6 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
   .side-box-body { padding:.9rem; }
   .side-booking-name { font-size:.72rem; }
   .side-booking-item { padding:.5rem; min-height:48px; }
-  .side-coupon-item { padding:.6rem; min-height:48px; }
 
   /* Tag bar */
   .tag-bar { padding:.5rem .8rem; gap:.35rem; overflow-x:auto; flex-wrap:nowrap; -webkit-overflow-scrolling:touch; }
@@ -850,7 +706,7 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
   .footer-logo { font-size:1.1rem; }
 
   /* Global touch targets */
-  .card-map-btn, .timeline-map-btn, .tabearuki-map-btn, .coupon-map-btn, .coupon-use-btn, .affiliate-btn, .parking-map-btn {
+  .card-map-btn, .timeline-map-btn, .tabearuki-map-btn, .affiliate-btn, .parking-map-btn {
     -webkit-tap-highlight-color:transparent;
   }
 
@@ -929,16 +785,6 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
       <div class="affiliate-filters" id="affiliate-filters"></div>
       <div class="affiliate-grid" id="affiliate-grid"></div>
     </div>
-
-    <!-- COUPON SECTION -->
-    <div class="coupon-section" id="coupon-section">
-      <div class="articles-header">
-        <div class="articles-title">お得なクーポン</div>
-        <div class="count-badge" id="coupon-count"></div>
-      </div>
-      <div class="coupon-filters" id="coupon-filters"></div>
-      <div class="coupon-grid" id="coupon-grid"></div>
-    </div>
   </div>
 
   <aside class="sidebar">
@@ -957,13 +803,6 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
       <div class="side-box-title" style="background:#1A56B0;">宿泊予約</div>
       <div class="side-box-body">
         <ul class="side-booking-list" id="side-booking-list"></ul>
-      </div>
-    </div>
-    <!-- Coupon Highlight -->
-    <div class="side-box">
-      <div class="side-box-title" style="background:#D97706;">クーポン</div>
-      <div class="side-box-body">
-        <ul class="side-coupon-list" id="side-coupon-list"></ul>
       </div>
     </div>
     <!-- Season Calendar -->
@@ -1028,9 +867,6 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
     <button class="bottom-nav-btn" data-section="affiliate" onclick="mobileNav('予約','affiliate')">
       <span class="bottom-nav-icon">&#127968;</span>予約
     </button>
-    <button class="bottom-nav-btn" data-section="coupon" onclick="mobileNav('クーポン','coupon')">
-      <span class="bottom-nav-icon">&#127915;</span>クーポン
-    </button>
   </div>
 </nav>
 
@@ -1042,7 +878,7 @@ footer { background:var(--ink); color:rgba(250,246,240,.35); text-align:center; 
 </footer>
 
 <script>
-const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて", couponCat:"すべて", affiliateType:"すべて" };
+const state = { cat:"全て", tag:null, section:"articles", tabearukiGenre:"すべて", affiliateType:"すべて" };
 
 // Static text
 document.getElementById('logo-main').textContent = SITE.name;
@@ -1054,7 +890,7 @@ document.getElementById('footer-sub').textContent = SITE.tagline;
 document.getElementById('hero-bg').style.backgroundImage = 'url(' + SITE.hero_img + ')';
 
 // Category nav
-const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き","予約","クーポン"];
+const cats = ["全て","観光","グルメ","イベント","コース","食べ歩き","予約"];
 const catNav = document.getElementById('cat-nav');
 cats.forEach(c => {
   const btn = document.createElement('button');
@@ -1067,7 +903,6 @@ cats.forEach(c => {
     if (c === "コース") { showSection('course'); }
     else if (c === "食べ歩き") { showSection('tabearuki'); }
     else if (c === "予約") { showSection('affiliate'); }
-    else if (c === "クーポン") { showSection('coupon'); }
     else { state.cat = c; showSection('articles'); render(); }
   });
   catNav.appendChild(btn);
@@ -1079,7 +914,6 @@ function showSection(s) {
   document.getElementById('course-section').className = 'course-section' + (s==='course' ? ' active' : '');
   document.getElementById('tabearuki-section').className = 'tabearuki-section' + (s==='tabearuki' ? ' active' : '');
   document.getElementById('affiliate-section').className = 'affiliate-section' + (s==='affiliate' ? ' active' : '');
-  document.getElementById('coupon-section').className = 'coupon-section' + (s==='coupon' ? ' active' : '');
   document.getElementById('tag-bar').style.display = s==='articles' ? 'flex' : 'none';
 }
 
@@ -1281,59 +1115,6 @@ function renderSideBooking() {
     </a>`).join('');
 }
 
-// Render coupons
-function getActiveCoupons() {
-  const today = new Date().toISOString().slice(0,10);
-  return COUPONS.filter(c => c.expires >= today);
-}
-function renderCoupons() {
-  const active = getActiveCoupons();
-  const cats = ["すべて", ...new Set(active.map(c => c.category))];
-  const filtersEl = document.getElementById('coupon-filters');
-  filtersEl.innerHTML = cats.map(c =>
-    `<button class="coupon-filter${c===state.couponCat?' active':''}" onclick="filterCoupon('${c}')">${c}</button>`
-  ).join('');
-
-  const list = state.couponCat === "すべて" ? active : active.filter(c => c.category === state.couponCat);
-  document.getElementById('coupon-count').textContent = list.length + '件';
-  const grid = document.getElementById('coupon-grid');
-  grid.innerHTML = list.map(c => `
-    <div class="coupon-card">
-      <div class="coupon-card-ribbon">${c.discount}</div>
-      ${c.is_pr ? '<div class="coupon-card-pr">PR</div>' : ''}
-      <div class="coupon-card-body">
-        <div class="coupon-shop-row">
-          <span class="coupon-shop-name">${c.shop}</span>
-          <span class="coupon-shop-cat">${c.category}</span>
-          <span class="coupon-shop-area">${c.area}</span>
-        </div>
-        <div class="coupon-title">${c.title}</div>
-        <div class="coupon-desc">${c.desc}</div>
-        <div class="coupon-condition">${c.condition}</div>
-        <div class="coupon-expires">有効期限: ${c.expires.replace(/-/g,'/')}まで</div>
-        <div class="coupon-actions">
-          <a class="coupon-use-btn" href="${c.link}" target="_blank" rel="noopener">クーポンを使う</a>
-          <button class="coupon-map-btn" onclick="openModal('${c.shop}','${c.map}')">地図</button>
-        </div>
-      </div>
-    </div>`).join('');
-}
-function filterCoupon(cat) {
-  state.couponCat = cat;
-  renderCoupons();
-}
-
-// Sidebar coupon widget
-function renderSideCoupons() {
-  const active = getActiveCoupons().filter(c => c.is_pr).slice(0, 3);
-  const list = document.getElementById('side-coupon-list');
-  list.innerHTML = active.map(c => `
-    <li class="side-coupon-item" onclick="document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat==='クーポン'));showSection('coupon');window.scrollTo({top:0,behavior:'smooth'})">
-      <div class="side-coupon-discount">${c.discount} - ${c.shop}</div>
-      <div class="side-coupon-title">${c.title}</div>
-    </li>`).join('');
-}
-
 // Sidebar featured
 const featuredWrap = document.getElementById('featured-wrap');
 [ARTICLES[0], ARTICLES[10]].forEach(a => {
@@ -1413,7 +1194,7 @@ const origCatBtns = document.querySelectorAll('.cat-btn');
 origCatBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     closeMenu();
-    const sec = btn.dataset.cat === 'コース' ? 'course' : btn.dataset.cat === '食べ歩き' ? 'tabearuki' : btn.dataset.cat === 'クーポン' ? 'coupon' : 'articles';
+    const sec = btn.dataset.cat === 'コース' ? 'course' : btn.dataset.cat === '食べ歩き' ? 'tabearuki' : 'articles';
     document.querySelectorAll('.bottom-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section===sec));
   });
 });
@@ -1430,7 +1211,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 function observeReveals() {
-  document.querySelectorAll('.card, .course-card, .tabearuki-item, .coupon-card, .affiliate-card').forEach(el => {
+  document.querySelectorAll('.card, .course-card, .tabearuki-item, .affiliate-card').forEach(el => {
     el.classList.add('reveal');
     revealObserver.observe(el);
   });
@@ -1446,8 +1227,6 @@ renderCourses();
 renderTabearuki();
 renderAffiliate();
 renderSideBooking();
-renderCoupons();
-renderSideCoupons();
 renderSeasons();
 renderParking();
 setTimeout(observeReveals, 100);

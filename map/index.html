@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>川越 穴場MAP｜地元民の本気おすすめ 保存版</title>
+<meta name="description" content="ガイドブックに載らない川越の穴場スポットだけをまとめた保存版MAP。地元民が実際に通っている店を厳選して掲載しています。">
+<meta property="og:title" content="川越 穴場MAP｜地元民の本気おすすめ 保存版">
+<meta property="og:description" content="観光客の9割が知らない川越の穴場だけ。地図付きの保存版リストです。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<script>
+/* =============================================================
+   ✏️  EDIT_HERE — 掲載スポットはここだけ編集すればOKです
+   =============================================================
+
+   【最重要】
+   いま入っているデータの多くは level:"定番" です。
+   これは index.html から引き継いだ一般的な観光スポットで、
+   Instagram の「ガイドブックに載らない名店だけ厳選」という
+   看板とは中身が一致していません。
+
+   → リールで紹介した実際の穴場に差し替えていってください。
+      level:"穴場" を付けたものだけが「穴場だけ表示」に出ます。
+
+   【1件の書き方】
+   {
+     name:  "店名・スポット名",
+     area:  "一番街" など徒歩圏のエリア名,
+     genre: "食べ歩き" / "グルメ" / "カフェ" / "観光" / "スイーツ" など,
+     level: "穴場" または "定番",
+     desc:  "40字前後。地元民しか知らない情報を1つ入れると刺さります",
+     price: "約300円" など（任意・空文字でも可）,
+     tip:   "混雑回避・裏メニューなど一言（任意）",
+     reel:  "https://www.instagram.com/reel/XXXX/"（任意・該当リールのURL）,
+   }
+   ============================================================= */
+
+const SPOTS = [
+  /* ---------- 食べ歩き ---------- */
+  { name:"いも恋（右門）", area:"一番街", genre:"食べ歩き", level:"定番",
+    desc:"さつまいもと粒あんをもちもちの皮で包んだ川越銘菓。", price:"約200円",
+    tip:"夕方は売り切れることがあるので午前中が確実。" },
+  { name:"芋けんぴ（芋十）", area:"菓子屋横丁", genre:"食べ歩き", level:"定番",
+    desc:"カリカリ食感の手作り芋けんぴ。食べ歩きの定番。", price:"約300円〜", tip:"" },
+  { name:"おさつチップ", area:"一番街", genre:"食べ歩き", level:"定番",
+    desc:"薄切りのさつまいもをカリッと揚げた人気スナック。", price:"約500円", tip:"" },
+  { name:"芋ソフトクリーム", area:"一番街", genre:"スイーツ", level:"定番",
+    desc:"濃厚なさつまいもの風味が楽しめるソフトクリーム。", price:"約400円", tip:"" },
+  { name:"焼きだんご", area:"菓子屋横丁", genre:"食べ歩き", level:"定番",
+    desc:"醤油の香ばしい香りが食欲をそそる焼きたて団子。", price:"約150円", tip:"" },
+  { name:"小江戸おはぎ", area:"一番街", genre:"スイーツ", level:"定番",
+    desc:"もち米とあんこの素朴な味わい。季節限定メニューも。", price:"約200円", tip:"" },
+  { name:"川越プリン", area:"大正浪漫夢通り", genre:"スイーツ", level:"定番",
+    desc:"レトロな瓶に入ったなめらかプリン。味の種類も豊富。", price:"約400円", tip:"" },
+  { name:"鰻おにぎり", area:"一番街", genre:"食べ歩き", level:"定番",
+    desc:"川越名物の鰻をおにぎりで手軽に味わえる一品。", price:"約350円", tip:"" },
+  { name:"大学いも（翠扇亭）", area:"一番街", genre:"食べ歩き", level:"定番",
+    desc:"外はカリカリ、中はホクホクの絶品大学いも。", price:"約300円", tip:"" },
+  { name:"手焼きせんべい", area:"菓子屋横丁", genre:"食べ歩き", level:"定番",
+    desc:"目の前で焼いてくれる体験型グルメ。醤油の香りがたまらない。", price:"約200円", tip:"" },
+
+  /* ---------- ドリンク・カフェ ---------- */
+  { name:"COEDOビール", area:"一番街", genre:"ドリンク", level:"定番",
+    desc:"川越発のクラフトビール。紅赤（さつまいもラガー）が人気。", price:"約600円", tip:"" },
+  { name:"抹茶ラテ（蔵カフェ）", area:"大正浪漫夢通り", genre:"カフェ", level:"定番",
+    desc:"蔵を改装したカフェで味わう本格抹茶ラテ。テイクアウトも可。", price:"約500円", tip:"" },
+  { name:"蔵を改装した古民家カフェ", area:"一番街", genre:"カフェ", level:"定番",
+    desc:"蔵造りの建物をそのまま生かした空間で過ごす静かな休憩時間。", price:"", tip:"" },
+
+  /* ---------- グルメ ---------- */
+  { name:"武蔵野うどん", area:"川越市内", genre:"グルメ", level:"定番",
+    desc:"コシの強い地粉うどんを温かい肉汁につけて食べる郷土の味。", price:"", tip:"" },
+
+  /* ---------- 観光 ---------- */
+  { name:"時の鐘", area:"一番街", genre:"観光", level:"定番",
+    desc:"400年の歴史を刻む川越のシンボル。6時・12時・15時・18時に鳴る。", price:"無料",
+    tip:"鐘の音を聞くなら時報の5分前に到着を。" },
+  { name:"菓子屋横丁", area:"菓子屋横丁", genre:"観光", level:"定番",
+    desc:"大正時代から続く駄菓子屋の路地。食べ歩きの拠点になる。", price:"無料", tip:"" },
+  { name:"蔵造りの街並み（一番街）", area:"一番街", genre:"観光", level:"定番",
+    desc:"黒漆喰の重厚な蔵造り建築が立ち並ぶメインストリート。", price:"無料", tip:"" },
+  { name:"川越氷川神社", area:"氷川町", genre:"観光", level:"定番",
+    desc:"縁結びの名社。鯛みくじや夏の風鈴回廊で知られる。", price:"無料", tip:"" },
+  { name:"喜多院", area:"小仙波町", genre:"観光", level:"定番",
+    desc:"徳川家光誕生の間と五百羅漢を伝える天台宗の古刹。", price:"有料拝観あり", tip:"" },
+  { name:"川越城本丸御殿", area:"郭町", genre:"観光", level:"定番",
+    desc:"関東唯一現存の藩主御殿。国の重要文化財。", price:"有料", tip:"" },
+  { name:"大正浪漫夢通り", area:"連雀町", genre:"観光", level:"定番",
+    desc:"大正期の洋風建築が並ぶレトロな通り。一番街より空いている。", price:"無料",
+    tip:"一番街が混む休日の昼はこちらへ逃げるのが地元民の動き方。" },
+];
+
+/* 徒歩でまわる順のモデルコース（時間は目安） */
+const COURSES = [
+  { id:"c3h", title:"王道3時間コース", sub:"はじめての川越に", duration:"約3時間",
+    steps:[
+      {time:"10:00", name:"本川越駅 出発", desc:"西武新宿線の終点。駅を出たらクレアモール商店街へ。"},
+      {time:"10:15", name:"蔵造りの街並み（一番街）", desc:"黒漆喰の蔵造り建築を散策。所要30分。"},
+      {time:"10:45", name:"時の鐘", desc:"川越のシンボル。所要15分。"},
+      {time:"11:00", name:"菓子屋横丁", desc:"芋けんぴや麩菓子を食べ歩き。所要30分。"},
+      {time:"11:30", name:"ランチ", desc:"うなぎか武蔵野うどん。所要60分。"},
+      {time:"12:30", name:"川越氷川神社", desc:"縁結びの名社で参拝。所要30分。"},
+      {time:"13:00", name:"本川越駅 到着", desc:"駅ナカでお土産も買えます。"},
+    ]},
+  { id:"c5h", title:"じっくり半日コース", sub:"歴史も食も満喫したい方へ", duration:"約5時間",
+    steps:[
+      {time:"9:30",  name:"川越駅 出発", desc:"東武バスで一番街方面へ。"},
+      {time:"10:00", name:"喜多院", desc:"五百羅漢と家光誕生の間は必見。所要45分。"},
+      {time:"10:50", name:"川越城本丸御殿", desc:"関東唯一の現存御殿。所要30分。"},
+      {time:"11:30", name:"蔵造りの街並み散策", desc:"一番街を北上。所要40分。"},
+      {time:"12:10", name:"ランチ＆食べ歩き", desc:"菓子屋横丁・大正浪漫夢通り周辺。所要80分。"},
+      {time:"13:30", name:"川越氷川神社", desc:"裏の新河岸川沿いも散歩に最適。所要40分。"},
+      {time:"14:10", name:"大正浪漫夢通り", desc:"レトロな通りでカフェ休憩。所要20分。"},
+      {time:"14:30", name:"川越駅 到着", desc:"クレアモール商店街を通って駅へ。"},
+    ]},
+];
+
+const SEASONS = [
+  { month:"3〜4月", icon:"🌸", title:"桜", items:["喜多院の桜まつり","新河岸川の桜並木","中院のしだれ桜"] },
+  { month:"5〜6月", icon:"🌿", title:"新緑", items:["川越八幡宮の藤棚","伊佐沼のハナショウブ"] },
+  { month:"7〜8月", icon:"🎐", title:"風鈴と祭り", items:["縁結び風鈴まつり","百万灯夏まつり","花火大会"] },
+  { month:"9〜10月", icon:"🏮", title:"秋祭り", items:["川越まつり（10月）","いも掘り体験"] },
+  { month:"11〜12月", icon:"🍁", title:"紅葉", items:["喜多院の紅葉","中院のモミジ","イルミネーション"] },
+  { month:"1〜2月", icon:"⛩", title:"初詣と梅", items:["氷川神社の初詣","喜多院だるま市（1/3）"] },
+];
+
+/* ✏️ リンク設定 — LINEの友だち追加URLを取得したらここに入れてください */
+const LINKS = {
+  instagram: "https://www.instagram.com/kawagoe.anaba/",
+  line: "",                      // 例: "https://lin.ee/XXXXXXX"
+  contact: "",                   // 店舗様からの掲載相談フォーム（Googleフォーム等）
+  home: "../",
+};
+</script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1B1F3B; --vermillion:#C4362A; --gold:#B8923E; --charcoal:#2A2520;
+  --ivory:#FAF6F0; --cream:#F3EDE4; --mist:#E8E0D4; --white:#fff;
+  --serif:'Shippori Mincho',serif; --sans:'Zen Kaku Gothic New',sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--charcoal);background:var(--ivory);
+  font-size:15px;line-height:1.85;padding-bottom:env(safe-area-inset-bottom)}
+
+/* ---------- HERO ---------- */
+.hero{background:var(--ink);color:var(--ivory);padding:2.4rem 1.3rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;opacity:.07;
+  background:radial-gradient(circle at 80% 10%,var(--gold) 0,transparent 55%)}
+.hero-badge{display:inline-block;border:1px solid rgba(184,146,62,.55);color:var(--gold);
+  font-size:.6rem;letter-spacing:.3em;padding:.22rem 1rem;margin-bottom:1rem}
+.hero h1{font-family:var(--serif);font-size:clamp(1.7rem,7.5vw,2.5rem);font-weight:800;
+  letter-spacing:.06em;line-height:1.35;margin-bottom:.7rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:.8rem;color:rgba(250,246,240,.62);font-weight:300;letter-spacing:.03em}
+.hero-count{margin-top:1.1rem;font-size:.72rem;color:rgba(250,246,240,.5);letter-spacing:.12em}
+
+/* ---------- SAVE HINT ---------- */
+.save-hint{background:var(--gold);color:var(--ink);font-size:.72rem;text-align:center;
+  padding:.55rem 1rem;font-weight:500;letter-spacing:.04em}
+
+/* ---------- FILTERS ---------- */
+.filters{position:sticky;top:0;z-index:50;background:var(--cream);
+  border-bottom:1px solid var(--mist);padding:.6rem .8rem}
+.filter-row{display:flex;gap:.35rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filter-row::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:.3rem .8rem;border:1px solid var(--mist);background:var(--ivory);
+  color:var(--charcoal);font-size:.72rem;font-family:var(--sans);cursor:pointer;
+  white-space:nowrap;transition:all .18s;letter-spacing:.03em}
+.chip:active{transform:scale(.96)}
+.chip.active{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.chip.anaba.active{background:var(--vermillion);border-color:var(--vermillion)}
+
+/* ---------- SECTION ---------- */
+.wrap{max-width:720px;margin:0 auto;padding:0 1rem}
+.sec{padding:2.2rem 0 .4rem}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;
+  border-bottom:1px solid var(--mist);padding-bottom:.5rem;margin-bottom:1.1rem}
+.sec-title{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--ink);letter-spacing:.08em}
+.sec-count{font-size:.68rem;color:var(--gold);letter-spacing:.1em}
+
+/* ---------- SPOT CARD ---------- */
+.spots{display:flex;flex-direction:column;gap:.7rem}
+.spot{background:var(--white);border:1px solid var(--mist);padding:.95rem 1rem;
+  display:flex;flex-direction:column;gap:.45rem}
+.spot-top{display:flex;align-items:flex-start;gap:.6rem}
+.spot-name{font-family:var(--serif);font-size:1.02rem;font-weight:700;color:var(--ink);
+  line-height:1.45;flex:1}
+.lv{flex:0 0 auto;font-size:.6rem;letter-spacing:.08em;padding:.14rem .5rem;margin-top:.22rem;font-weight:500}
+.lv-anaba{background:var(--vermillion);color:#fff}
+.lv-teiban{background:var(--mist);color:#7a6f60}
+.spot-meta{display:flex;flex-wrap:wrap;gap:.45rem;font-size:.68rem;color:#8a7f70;letter-spacing:.04em}
+.spot-meta span{border:1px solid var(--mist);padding:.08rem .45rem}
+.spot-desc{font-size:.8rem;line-height:1.75;color:#4a4238}
+.spot-tip{font-size:.74rem;line-height:1.7;color:var(--vermillion);
+  background:#fdf4f2;border-left:2px solid var(--vermillion);padding:.4rem .6rem}
+.spot-actions{display:flex;gap:.5rem;margin-top:.15rem}
+.btn{flex:1;text-align:center;padding:.5rem;font-size:.75rem;text-decoration:none;
+  letter-spacing:.06em;transition:opacity .18s;font-weight:500}
+.btn:active{opacity:.7}
+.btn-map{background:var(--ink);color:var(--ivory)}
+.btn-reel{background:var(--ivory);color:var(--ink);border:1px solid var(--ink)}
+.empty{text-align:center;padding:2.5rem 1rem;color:#9a8f80;font-size:.82rem}
+
+/* ---------- COURSE ---------- */
+.course{background:var(--white);border:1px solid var(--mist);margin-bottom:.8rem}
+.course-head{width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:.95rem 1rem;display:flex;align-items:center;gap:.7rem;font-family:var(--sans)}
+.course-dur{flex:0 0 auto;background:var(--gold);color:var(--ink);font-size:.62rem;
+  padding:.2rem .5rem;letter-spacing:.05em;font-weight:700}
+.course-t{flex:1}
+.course-t b{display:block;font-family:var(--serif);font-size:.98rem;color:var(--ink);font-weight:700}
+.course-t small{font-size:.7rem;color:#8a7f70}
+.course-arrow{transition:transform .25s;color:var(--gold);font-size:.8rem}
+.course.open .course-arrow{transform:rotate(180deg)}
+.course-body{display:none;border-top:1px solid var(--mist);padding:.9rem 1rem 1.1rem}
+.course.open .course-body{display:block}
+.step{display:flex;gap:.75rem;padding:.45rem 0}
+.step-time{flex:0 0 3.1rem;font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.04em;padding-top:.1rem}
+.step-body{flex:1;border-left:1px solid var(--mist);padding-left:.75rem}
+.step-body b{display:block;font-size:.84rem;color:var(--ink);font-weight:700}
+.step-body small{font-size:.72rem;color:#6a6055;line-height:1.65}
+
+/* ---------- SEASON ---------- */
+.seasons{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
+.season{background:var(--white);border:1px solid var(--mist);padding:.8rem}
+.season-h{display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem}
+.season-h i{font-style:normal;font-size:1rem}
+.season-h b{font-family:var(--serif);font-size:.85rem;color:var(--ink)}
+.season-m{font-size:.62rem;color:var(--gold);letter-spacing:.08em;margin-bottom:.35rem}
+.season ul{list-style:none;font-size:.73rem;color:#6a6055;line-height:1.8}
+.season li::before{content:'・'}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--ink);color:var(--ivory);padding:2rem 1.3rem;text-align:center;margin-top:2.5rem}
+.cta h2{font-family:var(--serif);font-size:1.15rem;font-weight:700;letter-spacing:.06em;margin-bottom:.6rem}
+.cta p{font-size:.78rem;color:rgba(250,246,240,.6);font-weight:300;margin-bottom:1.2rem;line-height:1.85}
+.cta-btn{display:block;max-width:320px;margin:0 auto .6rem;padding:.8rem;
+  text-decoration:none;font-size:.82rem;font-weight:700;letter-spacing:.08em;transition:opacity .18s}
+.cta-btn:active{opacity:.75}
+.cta-ig{background:linear-gradient(95deg,#C4362A,#B8923E);color:#fff}
+.cta-line{background:#06C755;color:#fff}
+
+/* ---------- SHOP ---------- */
+.shop{background:var(--cream);border-top:1px solid var(--mist);padding:1.8rem 1.3rem;text-align:center}
+.shop h3{font-family:var(--serif);font-size:.95rem;color:var(--ink);margin-bottom:.5rem;letter-spacing:.06em}
+.shop p{font-size:.75rem;color:#6a6055;line-height:1.85;max-width:420px;margin:0 auto 1rem}
+.shop a{display:inline-block;border:1px solid var(--ink);color:var(--ink);text-decoration:none;
+  padding:.5rem 1.6rem;font-size:.76rem;letter-spacing:.06em}
+
+footer{background:var(--ink);color:rgba(250,246,240,.45);text-align:center;
+  padding:1.6rem 1rem;font-size:.68rem;letter-spacing:.08em}
+footer b{display:block;font-family:var(--serif);color:var(--ivory);font-size:.9rem;
+  font-weight:700;margin-bottom:.3rem;letter-spacing:.12em}
+footer a{color:var(--gold);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">KAWAGOE ANABA MAP</div>
+  <h1>ガイドブックに<br>載らない<em>川越</em>。</h1>
+  <p>地元民が実際に通っている店だけ。保存版MAPです。</p>
+  <div class="hero-count" id="hero-count"></div>
+</div>
+
+<div class="save-hint">📌 このページをブックマークすると、川越に着いてからすぐ開けます</div>
+
+<div class="filters">
+  <div class="filter-row" id="genre-row"></div>
+  <div class="filter-row" id="area-row" style="margin-top:.4rem"></div>
+</div>
+
+<div class="wrap">
+
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-title">掲載スポット</div>
+      <div class="sec-count" id="spot-count"></div>
+    </div>
+    <div class="spots" id="spot-list"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-title">モデルコース</div>
+      <div class="sec-count" id="course-count"></div>
+    </div>
+    <div id="course-list"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head">
+      <div class="sec-title">季節のみどころ</div>
+      <div class="sec-count">年間カレンダー</div>
+    </div>
+    <div class="seasons" id="season-list"></div>
+  </div>
+
+</div>
+
+<div class="cta">
+  <h2>新しい穴場は、先にInstagramへ</h2>
+  <p>このMAPに載せる前の新店・限定メニューは<br>リールで先に紹介しています。</p>
+  <a class="cta-btn cta-ig" id="cta-ig" href="#">Instagramをフォローする</a>
+  <a class="cta-btn cta-line" id="cta-line" href="#" style="display:none">LINEで最新情報を受け取る</a>
+</div>
+
+<div class="shop">
+  <h3>店舗の方へ</h3>
+  <p>川越で店舗を営まれている方へ。取材・撮影・Instagramでのご紹介を承っています。掲載をご希望の場合はご連絡ください。</p>
+  <a id="shop-contact" href="#">掲載について相談する</a>
+</div>
+
+<footer>
+  <b>川越穴場</b>
+  地元民の本気おすすめ<br>
+  <a id="foot-home" href="../">▷ 川越マップ トップへ</a>
+</footer>
+
+<script>
+const state = { genre:"すべて", area:"すべて", anabaOnly:false };
+
+const uniq = (arr) => [...new Set(arr)];
+const mapUrl = (name) =>
+  "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " 川越");
+
+/* ---- フィルタ描画 ---- */
+function renderFilters(){
+  const gRow = document.getElementById('genre-row');
+  const aRow = document.getElementById('area-row');
+
+  const anabaBtn = document.createElement('button');
+  anabaBtn.className = 'chip anaba' + (state.anabaOnly ? ' active' : '');
+  anabaBtn.textContent = '穴場だけ';
+  anabaBtn.onclick = () => { state.anabaOnly = !state.anabaOnly; render(); };
+  gRow.replaceChildren(anabaBtn);
+
+  uniq(["すべて", ...SPOTS.map(s => s.genre)]).forEach(g => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (state.genre === g ? ' active' : '');
+    b.textContent = g;
+    b.onclick = () => { state.genre = g; render(); };
+    gRow.appendChild(b);
+  });
+
+  aRow.replaceChildren();
+  uniq(["すべて", ...SPOTS.map(s => s.area)]).forEach(a => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (state.area === a ? ' active' : '');
+    b.textContent = a;
+    b.onclick = () => { state.area = a; render(); };
+    aRow.appendChild(b);
+  });
+}
+
+/* ---- スポット描画 ---- */
+function filtered(){
+  return SPOTS.filter(s =>
+    (state.genre === "すべて" || s.genre === state.genre) &&
+    (state.area  === "すべて" || s.area  === state.area) &&
+    (!state.anabaOnly || s.level === "穴場")
+  );
+}
+
+function renderSpots(){
+  const list = filtered();
+  const el = document.getElementById('spot-list');
+  document.getElementById('spot-count').textContent = list.length + " 件";
+
+  if(!list.length){
+    el.innerHTML = '<div class="empty">条件に合うスポットがまだありません。<br>フィルタを変えてみてください。</div>';
+    return;
+  }
+
+  el.replaceChildren(...list.map(s => {
+    const card = document.createElement('div');
+    card.className = 'spot';
+    const lvClass = s.level === "穴場" ? "lv-anaba" : "lv-teiban";
+    const meta = [s.area, s.genre, s.price].filter(Boolean)
+      .map(v => `<span>${v}</span>`).join('');
+    card.innerHTML = `
+      <div class="spot-top">
+        <div class="spot-name">${s.name}</div>
+        <div class="lv ${lvClass}">${s.level}</div>
+      </div>
+      <div class="spot-meta">${meta}</div>
+      <div class="spot-desc">${s.desc}</div>
+      ${s.tip ? `<div class="spot-tip">${s.tip}</div>` : ``}
+      <div class="spot-actions">
+        <a class="btn btn-map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">地図を開く</a>
+        ${s.reel ? `<a class="btn btn-reel" href="${s.reel}" target="_blank" rel="noopener">リールを見る</a>` : ``}
+      </div>`;
+    return card;
+  }));
+}
+
+/* ---- コース描画 ---- */
+function renderCourses(){
+  const el = document.getElementById('course-list');
+  document.getElementById('course-count').textContent = COURSES.length + " コース";
+
+  el.replaceChildren(...COURSES.map(c => {
+    const box = document.createElement('div');
+    box.className = 'course';
+    box.innerHTML = `
+      <button class="course-head">
+        <span class="course-dur">${c.duration}</span>
+        <span class="course-t"><b>${c.title}</b><small>${c.sub}</small></span>
+        <span class="course-arrow">▼</span>
+      </button>
+      <div class="course-body">
+        ${c.steps.map(s => `
+          <div class="step">
+            <div class="step-time">${s.time}</div>
+            <div class="step-body">
+              <b>${s.name}</b>
+              <small>${s.desc}</small>
+            </div>
+          </div>`).join('')}
+        <a class="btn btn-map" style="display:block;margin-top:.8rem"
+           href="${mapUrl(c.steps[0].name)}" target="_blank" rel="noopener">出発地点の地図を開く</a>
+      </div>`;
+    box.querySelector('.course-head').onclick = () => box.classList.toggle('open');
+    return box;
+  }));
+}
+
+/* ---- 季節描画 ---- */
+function renderSeasons(){
+  document.getElementById('season-list').replaceChildren(...SEASONS.map(s => {
+    const d = document.createElement('div');
+    d.className = 'season';
+    d.innerHTML = `
+      <div class="season-h"><i>${s.icon}</i><b>${s.title}</b></div>
+      <div class="season-m">${s.month}</div>
+      <ul>${s.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+    return d;
+  }));
+}
+
+/* ---- リンク設定 ---- */
+function renderLinks(){
+  document.getElementById('cta-ig').href = LINKS.instagram;
+  document.getElementById('foot-home').href = LINKS.home;
+
+  const lineBtn = document.getElementById('cta-line');
+  if(LINKS.line){ lineBtn.href = LINKS.line; lineBtn.style.display = 'block'; }
+
+  const shop = document.getElementById('shop-contact');
+  shop.href = LINKS.contact || LINKS.instagram;
+  if(!LINKS.contact) shop.textContent = 'Instagramから相談する';
+}
+
+function render(){
+  renderFilters();
+  renderSpots();
+}
+
+(function init(){
+  const anaba = SPOTS.filter(s => s.level === "穴場").length;
+  document.getElementById('hero-count').textContent =
+    `全${SPOTS.length}スポット掲載` + (anaba ? `　/　うち穴場${anaba}件` : ``);
+  render();
+  renderCourses();
+  renderSeasons();
+  renderLinks();
+})();
+</script>
+</body>
+</html>

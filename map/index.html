@@ -36,10 +36,42 @@
      price: "約300円" など（任意・空文字でも可）,
      tip:   "混雑回避・裏メニューなど一言（任意）",
      reel:  "https://www.instagram.com/reel/XXXX/"（任意・該当リールのURL）,
+
+     // --- 以下は店舗スポット向けの任意フィールド ---
+     hours:   "ランチ 11:30〜14:30 / ディナー 18:00〜23:00",
+     closed:  "月・火",
+     access:  "本川越駅東口から徒歩8分",
+     tel:     "049-000-0000",   // スマホでタップ発信できます
+     menu:    "名物A / 名物B",   // 「これを頼むべき」の品
+     ig:      "@shop_account",  // 店舗側のInstagram
+     query:   "住所や正式名称",  // 地図検索を店名以外で行いたい場合
    }
    ============================================================= */
 
 const SPOTS = [
+  /* ---------- 穴場（リール紹介店） ---------- */
+  { name:"café+kitchen 北風と太陽", area:"松江町", genre:"グルメ", level:"穴場",
+    desc:"イタリアンとメキシカンが一皿で楽しめる隠れ家カフェ。特製タコライスが人気No.1。",
+    price:"ランチ1,200円",
+    tip:"ランチのドリンクはアルコールに変更でき、しかも100円引き。昼から生ビールが飲める貴重な一軒です。",
+    menu:"特製タコライス / 選べるパスタ7種 / 北風と太陽カレー",
+    hours:"ランチ 11:30〜14:30（LO14:00） / ディナー 18:00〜23:00（LO22:00）",
+    closed:"月・火（ディナーのみ）",
+    access:"本川越駅東口から徒歩約8分",
+    tel:"049-298-5610",
+    ig:"@kitakazetotaiyou33",
+    query:"埼玉県川越市松江町1-23-3 北風と太陽",
+    reel:"" },
+
+  { name:"青龍", area:"クレアモール", genre:"グルメ", level:"穴場",
+    desc:"クレアモールの路地裏に隠れた町中華。店主がワンオペで仕込む手作りの味が続く一軒。",
+    price:"ランチ1,000〜1,999円",
+    tip:"裏メニューの海老チャーハンが頼めます。麻婆丼ランチは揚げ餃子＋ミニラーメン（or杏仁豆腐）付き。",
+    menu:"青龍ラーメン（五目あんかけ） / かにチャーハン / 麻婆丼ランチ",
+    access:"川越駅東口から徒歩約4分／クレアモールの路地を入ってすぐ",
+    query:"青龍 川越市",
+    reel:"" },
+
   /* ---------- 食べ歩き ---------- */
   { name:"いも恋（右門）", area:"一番街", genre:"食べ歩き", level:"定番",
     desc:"さつまいもと粒あんをもちもちの皮で包んだ川越銘菓。", price:"約200円",
@@ -199,6 +231,12 @@ body{font-family:var(--sans);color:var(--charcoal);background:var(--ivory);
 .spot-desc{font-size:.8rem;line-height:1.75;color:#4a4238}
 .spot-tip{font-size:.74rem;line-height:1.7;color:var(--vermillion);
   background:#fdf4f2;border-left:2px solid var(--vermillion);padding:.4rem .6rem}
+.spot-info{font-size:.73rem;color:#6a6055;line-height:1.7;
+  border-top:1px dashed var(--mist);padding-top:.5rem;display:flex;flex-direction:column;gap:.12rem}
+.spot-info div{display:flex;gap:.5rem}
+.spot-info b{flex:0 0 3.2rem;color:var(--ink);font-weight:500;font-size:.68rem;letter-spacing:.04em}
+.spot-info span{flex:1}
+.spot-info a{color:var(--vermillion);text-decoration:none}
 .spot-actions{display:flex;gap:.5rem;margin-top:.15rem}
 .btn{flex:1;text-align:center;padding:.5rem;font-size:.75rem;text-decoration:none;
   letter-spacing:.06em;transition:opacity .18s;font-weight:500}
@@ -327,8 +365,12 @@ footer a{color:var(--gold);text-decoration:none}
 const state = { genre:"すべて", area:"すべて", anabaOnly:false };
 
 const uniq = (arr) => [...new Set(arr)];
-const mapUrl = (name) =>
-  "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " 川越");
+const mapUrl = (nameOrSpot) => {
+  const q = typeof nameOrSpot === "string"
+    ? nameOrSpot + " 川越"
+    : (nameOrSpot.query || nameOrSpot.name + " 川越");
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+};
 
 /* ---- フィルタ描画 ---- */
 function renderFilters(){
@@ -368,6 +410,21 @@ function filtered(){
   );
 }
 
+function infoRows(s){
+  const row = (label, value) => value ? `<div><b>${label}</b><span>${value}</span></div>` : ``;
+  const rows = [
+    row("名物", s.menu),
+    row("営業", s.hours),
+    row("定休", s.closed),
+    row("行き方", s.access),
+    row("電話", s.tel ? `<a href="tel:${s.tel.replace(/-/g, "")}">${s.tel}</a>` : ""),
+    row("店舗IG", s.ig
+      ? `<a href="https://www.instagram.com/${s.ig.replace(/^@/, "")}/" target="_blank" rel="noopener">${s.ig}</a>`
+      : ""),
+  ].join("");
+  return rows ? `<div class="spot-info">${rows}</div>` : ``;
+}
+
 function renderSpots(){
   const list = filtered();
   const el = document.getElementById('spot-list');
@@ -392,8 +449,9 @@ function renderSpots(){
       <div class="spot-meta">${meta}</div>
       <div class="spot-desc">${s.desc}</div>
       ${s.tip ? `<div class="spot-tip">${s.tip}</div>` : ``}
+      ${infoRows(s)}
       <div class="spot-actions">
-        <a class="btn btn-map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">地図を開く</a>
+        <a class="btn btn-map" href="${mapUrl(s)}" target="_blank" rel="noopener">地図を開く</a>
         ${s.reel ? `<a class="btn btn-reel" href="${s.reel}" target="_blank" rel="noopener">リールを見る</a>` : ``}
       </div>`;
     return card;

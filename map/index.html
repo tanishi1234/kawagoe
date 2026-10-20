@@ -45,12 +45,14 @@
      menu:    "名物A / 名物B",   // 「これを頼むべき」の品
      ig:      "@shop_account",  // 店舗側のInstagram
      query:   "住所や正式名称",  // 地図検索を店名以外で行いたい場合
+     img:     "https://example.com/photo.jpg",  // 写真URL（任意）
    }
    ============================================================= */
 
 const SPOTS = [
   /* ---------- 穴場（リール紹介店） ---------- */
   { name:"café+kitchen 北風と太陽", area:"松江町", genre:"グルメ", level:"穴場",
+    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Tacos_de_Atun.jpg/640px-Tacos_de_Atun.jpg",
     desc:"イタリアンとメキシカンが一皿で楽しめる隠れ家カフェ。特製タコライスが人気No.1。",
     price:"ランチ1,200円",
     tip:"ランチのドリンクはアルコールに変更でき、しかも100円引き。昼から生ビールが飲める貴重な一軒です。",
@@ -64,6 +66,7 @@ const SPOTS = [
     reel:"https://www.instagram.com/p/DeTi8zRBaFK/" },
 
   { name:"青龍", area:"クレアモール", genre:"グルメ", level:"穴場",
+    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Shoyu_ramen.jpg/640px-Shoyu_ramen.jpg",
     desc:"クレアモールの路地裏に隠れた町中華。店主がワンオペで仕込む手作りの味が続く一軒。",
     price:"ランチ1,000〜1,999円",
     tip:"裏メニューの海老チャーハンが頼めます。麻婆丼ランチは揚げ餃子＋ミニラーメン（or杏仁豆腐）付き。",
@@ -73,6 +76,7 @@ const SPOTS = [
     reel:"https://www.instagram.com/p/DdnlzSlpGoL/" },
 
   { name:"やきとり箔（haku）", area:"南通町", genre:"居酒屋", level:"穴場",
+    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Grilled_Chicken_Skewers.jpg/640px-Grilled_Chicken_Skewers.jpg",
     desc:"備長炭で焼き上げる信玄鶏の焼き鳥。落ち着いた店内の“大人の焼き鳥屋”。",
     tip:"焼き鳥だけでなく鶏刺しも評判。土日は12時から開いているので昼飲みにも使えます。",
     menu:"白レバー / ねぎ間 / 鶏刺し",
@@ -82,6 +86,7 @@ const SPOTS = [
     reel:"https://www.instagram.com/p/DdNQKoehc7K/" },
 
   { name:"チョッと立ち呑み", area:"脇田町", genre:"居酒屋", level:"穴場",
+    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Japanese_Beer.jpg/640px-Japanese_Beer.jpg",
     desc:"手作りのおつまみが旨い立ち飲み店。一人でも入りやすい雰囲気。",
     price:"せんべろセット1,000円",
     tip:"1,000円のせんべろセットが看板。仕事終わりの一杯から一人の昼飲みまで使えます。",
@@ -91,6 +96,7 @@ const SPOTS = [
     reel:"https://www.instagram.com/p/DdIJDvUBi2E/" },
 
   { name:"小川藤（おがとう）", area:"松江町", genre:"グルメ", level:"穴場",
+    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Unagi_don.jpg/640px-Unagi_don.jpg",
     desc:"大正12年創業の老舗うなぎ店。紀州備長炭で焼き、秘伝のタレで仕上げる。",
     tip:"売り切れ次第終了の場合あり。うな重より気軽に頼めるうな丼もあります。",
     menu:"うな重 / うな丼",
@@ -100,6 +106,7 @@ const SPOTS = [
     reel:"https://www.instagram.com/p/DcqKGPlOWba/" },
 
   { name:"スープカレー専門店 plus one", area:"石田", genre:"グルメ", level:"穴場",
+    img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Soup_Curry.jpg/640px-Soup_Curry.jpg",
     desc:"札幌出身の店主による本場仕込みのスープカレー。鶏・豚・昆布・煮干しを2日間炊き上げたスープの深い旨味。",
     tip:"ほぼ毎日行列で売り切れ閉店（通常15:30頃）。来店前に出窓から混雑状況が見えるので確認できます。早めの時間に来るのが鉄則。",
     menu:"スープカレー（辛さ10段階選択可）/ こだわりハンバーグ（数量限定）/ トッピング14種類以上",
@@ -255,8 +262,10 @@ body{font-family:var(--sans);color:var(--charcoal);background:var(--ivory);
 
 /* ---------- SPOT CARD ---------- */
 .spots{display:flex;flex-direction:column;gap:.7rem}
-.spot{background:var(--white);border:1px solid var(--mist);padding:.95rem 1rem;
-  display:flex;flex-direction:column;gap:.45rem}
+.spot{background:var(--white);border:1px solid var(--mist);overflow:hidden;
+  display:flex;flex-direction:column;gap:0}
+.spot-img{width:100%;height:160px;object-fit:cover;display:block}
+.spot-body{padding:.95rem 1rem;display:flex;flex-direction:column;gap:.45rem}
 .spot-top{display:flex;align-items:flex-start;gap:.6rem}
 .spot-name{font-family:var(--serif);font-size:1.02rem;font-weight:700;color:var(--ink);
   line-height:1.45;flex:1}
@@ -485,17 +494,20 @@ function renderSpots(){
     const meta = [s.area, s.genre, s.price].filter(Boolean)
       .map(v => `<span>${v}</span>`).join('');
     card.innerHTML = `
-      <div class="spot-top">
-        <div class="spot-name">${s.name}</div>
-        <div class="lv ${lvClass}">${s.level}</div>
-      </div>
-      <div class="spot-meta">${meta}</div>
-      <div class="spot-desc">${s.desc}</div>
-      ${s.tip ? `<div class="spot-tip">${s.tip}</div>` : ``}
-      ${infoRows(s)}
-      <div class="spot-actions">
-        <a class="btn btn-map" href="${mapUrl(s)}" target="_blank" rel="noopener">地図を開く</a>
-        ${s.reel ? `<a class="btn btn-reel" href="${s.reel}" target="_blank" rel="noopener">リールを見る</a>` : ``}
+      ${s.img ? `<img class="spot-img" src="${s.img}" alt="${s.name}">` : ``}
+      <div class="spot-body">
+        <div class="spot-top">
+          <div class="spot-name">${s.name}</div>
+          <div class="lv ${lvClass}">${s.level}</div>
+        </div>
+        <div class="spot-meta">${meta}</div>
+        <div class="spot-desc">${s.desc}</div>
+        ${s.tip ? `<div class="spot-tip">${s.tip}</div>` : ``}
+        ${infoRows(s)}
+        <div class="spot-actions">
+          <a class="btn btn-map" href="${mapUrl(s)}" target="_blank" rel="noopener">地図を開く</a>
+          ${s.reel ? `<a class="btn btn-reel" href="${s.reel}" target="_blank" rel="noopener">リールを見る</a>` : ``}
+        </div>
       </div>`;
     return card;
   }));
